@@ -1,21 +1,18 @@
 import dynamic from 'next/dynamic'
-// Step 5 - delete Instructions components
-import Instructions from '@/components/dom/Instructions'
-// import Shader from '@/components/canvas/Shader/Shader'
+import Menu from '@/components/dom/Menu'
+import FlatEditor from '@/components/dom/SceneEditor'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const SceneEditor = dynamic(() => import('@/components/canvas/Editor'), {
+const VREditor = dynamic(() => import('@/components/canvas/Editor'), {
   ssr: false,
 })
 
-// dom components goes here
-const DOM = () => {
+const JSONEditor = () => {
   return (
-    // Step 5 - delete Instructions components
-    <Instructions />
+    <FlatEditor />
   )
 }
 
@@ -23,7 +20,7 @@ const DOM = () => {
 const R3F = () => {
   return (
     <>
-      <SceneEditor />
+      <VREditor />
     </>
   )
 }
@@ -31,7 +28,8 @@ const R3F = () => {
 const Page = () => {
   return (
     <>
-      <DOM />
+      <Menu />
+      <JSONEditor />
       {/* @ts-ignore */}
       <R3F r3f />
     </>
