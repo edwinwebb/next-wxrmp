@@ -7,10 +7,13 @@ import partition from '@/helpers/partition'
 import '@/styles/index.css'
 import dynamic from 'next/dynamic'
 
+// https://nextjs.org/docs/advanced-features/custom-app
+
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
 })
 
+// Split components into DOM or R3F by prop flags
 const Balance = ({ child }) => {
   const [r3f, dom] = partition(child, (c) => c.props.r3f === true)
 
@@ -30,7 +33,7 @@ function App({ Component, pageProps = { title: 'index' } }) {
   }, [router])
 
   const child = Component(pageProps).props.children
-  
+
   return (
     <>
       <Header title={pageProps.title} />

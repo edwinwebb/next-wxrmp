@@ -5,7 +5,7 @@
 Import and position Images and Videos into a custom VR space in your Browser. Export the scene to JSON.
 
 ## TODO
-Icons
+
 
 
 # type-wxrmp
