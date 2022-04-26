@@ -1,4 +1,4 @@
-import { Canvas } from '@react-three/fiber'
+import { VRCanvas } from '@react-three/xr'
 import { OrbitControls, Preload } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import { useEffect, useRef } from 'react'
@@ -21,7 +21,7 @@ const LCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
 
   return (
-    <Canvas
+    <VRCanvas
       mode='concurrent'
       style={{
         position: 'absolute',
@@ -32,7 +32,7 @@ const LCanvas = ({ children }) => {
       <LControl />
       <Preload all />
       {children}
-    </Canvas>
+    </VRCanvas>
   )
 }
 
