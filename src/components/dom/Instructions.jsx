@@ -13,20 +13,20 @@ export default function Instructions() {
       </p>
       <div className='tracking-wider'>
         Step 1 - <span style={{ color: 'rgb(84, 90, 114)' }}>update:</span>
-        <span style={{ color: 'rgb(249, 196, 232)' }}> @/pages/index </span>
+        <span style={{ color: 'rgb(249, 196, 232)' }}> @/pages/index DONE</span>
         <br />
         Step 2 - <span style={{ color: 'rgb(84, 90, 114)' }}>update:</span>
         <span style={{ color: 'rgb(249, 196, 232)' }}>
           {' '}
-          @/components/canvas/Shader/Shader{' '}
+          @/components/canvas/Shader/Shader{' '} DONE
         </span>
         <br />
         Step 3 - <span style={{ color: 'rgb(84, 90, 114)' }}>delete:</span>
-        <span style={{ color: 'rgb(249, 196, 232)' }}> @/pages/box </span>
+        <span style={{ color: 'rgb(249, 196, 232)' }}> @/pages/box DONE</span>
         <br />
         Step 4 -{' '}
         <span style={{ color: 'rgb(84, 90, 114)' }}>update header:</span>
-        <span style={{ color: 'rgb(249, 196, 232)' }}> @/config </span>
+        <span style={{ color: 'rgb(249, 196, 232)' }}> @/config DONE</span>
         <br />
         Step 5 - <span style={{ color: 'rgb(84, 90, 114)' }}>delete:</span>
         <span style={{ color: 'rgb(249, 196, 232)' }}>
