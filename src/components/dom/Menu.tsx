@@ -1,5 +1,5 @@
 export default function Menu() {
   return (
-    <div>menu</div>
+    <div className="w-100 bg-red-400 h-16">menu</div>
   )
 }

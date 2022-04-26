@@ -21,18 +21,16 @@ const LCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
 
   return (
-    <VRCanvas
-      mode='concurrent'
-      style={{
-        position: 'absolute',
-        top: 0,
-      }}
-      onCreated={(state) => state.events.connect(dom.current)}
-    >
-      <LControl />
-      <Preload all />
-      {children}
-    </VRCanvas>
+    <div className='h-[calc(50vh-2rem)]'>
+      <VRCanvas
+        mode='concurrent'
+        onCreated={(state) => state.events.connect(dom.current)}
+      >
+        {/* <LControl /> */}
+        <Preload all />
+        {children}
+      </VRCanvas>
+    </div>
   )
 }
 

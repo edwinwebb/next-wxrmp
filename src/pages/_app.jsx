@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic'
 
 // https://nextjs.org/docs/advanced-features/custom-app
 
+// dynamically load canvas
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
 })
