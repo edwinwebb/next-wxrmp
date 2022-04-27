@@ -18,10 +18,12 @@ const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
 const Balance = ({ child }) => {
   const [r3f, dom] = partition(child, (c) => c.props.r3f === true)
 
+  console.log(r3f)
+
   return (
     <>
       <Dom>{dom}</Dom>
-      <LCanvas>{r3f}</LCanvas>
+      {r3f.length > 0 && <LCanvas>{r3f}</LCanvas>}
     </>
   )
 }
