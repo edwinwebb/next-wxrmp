@@ -4,6 +4,12 @@
 
 Import and position Images and Videos into a custom VR space in your Browser. Export the scene to JSON.
 
+## Site Map
+/home : app, make a scene, export it, import it
+/about : about the site
+/contact : send me an email
+
+
 ## TODO
 
 ## Development

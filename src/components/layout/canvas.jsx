@@ -21,7 +21,7 @@ const LCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
 
   return (
-    <div className='h-[calc(50vh-2rem)] w-100 md:h-screen md:w-[calc(100vw-16rem)] md:absolute md:top-0 md:left-64'>
+    <div className='h-[calc(50vh-2rem)] w-100 md:h-screen md:w-[calc(100vw-16rem)] md:absolute md:top-12 md:left-64'>
       <VRCanvas
         mode='concurrent'
         onCreated={(state) => state.events.connect(dom.current)}
