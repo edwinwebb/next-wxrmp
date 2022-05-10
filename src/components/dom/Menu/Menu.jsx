@@ -9,7 +9,7 @@ export default function Menu({ fullwidth }) {
       <nav className="flex items-center flex-wrap">
         <Link href="/">
           <a className="inline-flex items-center">
-            <span className=' inline-flex mx-2 my-1'><Logo /></span>
+            <span className='inline-flex mx-2 my-1'><Logo /></span>
             <span className="text-xl text-white font-bold uppercase tracking-wide">WXRMP</span>
           </a>
         </Link>

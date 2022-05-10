@@ -28,7 +28,6 @@ const R3F = () => {
 const Page = () => {
   return (
     <>
-      <Menu />
       <JSONEditor />
       {/* @ts-ignore */}
       <R3F r3f />
