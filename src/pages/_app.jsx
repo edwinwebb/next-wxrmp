@@ -28,9 +28,9 @@ const Balance = ({ child }) => {
         {r3f.length > 0 && <LCanvas>{r3f}</LCanvas>}
       </div> */}
       <div className='bg-red-100 flex flex-col flex-wrap h-screen md:flex-row'>
-        <div className='bg-yellow-100 h-12 w-screen'>menu</div>
-        <div className='bg-green-100 h-96 md:h-full md:w-80'>dom</div>
-        {hasCanvas && <div className='bg-blue-100 flex-1'>c</div>}
+        <div className='bg-yellow-100 h-12 w-screen'><Menu /></div>
+        <div className={`bg-green-100 h-96 overflow-scroll md:h-full ${hasCanvas ? 'md:w-80' : 'md:w-full'}`}><Dom>{dom}</Dom></div>
+        {hasCanvas && <div className='bg-blue-100 opacity-50 flex-1'><LCanvas>{r3f}</LCanvas></div>}
       </div>
     </>
   )

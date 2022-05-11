@@ -5,7 +5,7 @@ import Logo from "./Logo"
 export default function Menu({ fullwidth }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="bg-pink-300">
+    <div className="bg-pink-300 h-12">
       <nav className="flex items-center flex-wrap">
         <Link href="/">
           <a className="inline-flex items-center">

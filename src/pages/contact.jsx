@@ -3,7 +3,6 @@ import Menu from '@/components/dom/Menu/Menu'
 const Page = () => {
   return (
     <>
-      <Menu fullwidth />
       <div>
         Contact - Hello World
       </div>
