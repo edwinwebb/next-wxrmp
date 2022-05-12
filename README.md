@@ -18,9 +18,29 @@ MVP$
 /buy/id : get access to a scene
 
 ## TODO
+Firebase
+- metamask integration
+- database of scenes
+- database of images and videos
+- payment from user to publisher
+- payment split
 
-## Development
+Payment split
+- publisher - get rich
+- platform - be greedy
+- gas - be low
 
+Socials
+- Tiktok
+- twitter - wxrmp_offical
+- Subreddit
+- Discord
+- Instagram
+
+
+
+
+## Development Files
 /src/pages/_app : Top level, header and balancer
 /src/layout/ : wrappers, dom and canvas
 

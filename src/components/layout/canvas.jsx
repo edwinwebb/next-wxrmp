@@ -19,9 +19,7 @@ const LControl = () => {
 // https://github.com/pmndrs/drei#preload
 const LCanvas = ({ children }) => {
   // const dom = useStore((state) => state.dom)
-
   return (
-
     <VRCanvas
       mode='concurrent'
     // onCreated={(state) => state.events.connect(dom.current)}
@@ -30,8 +28,8 @@ const LCanvas = ({ children }) => {
       <color attach={'background'} args={['hotpink']} />
       <Preload all />
       {children}
+      <OrbitControls />
     </VRCanvas>
-
   )
 }
 
