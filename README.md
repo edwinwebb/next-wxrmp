@@ -18,6 +18,12 @@ MVP$
 /buy/id : get access to a scene
 
 ## TODO
+App
+- Store
+- Items render
+- Items edit
+- Export JSON
+
 Firebase
 - metamask integration
 - database of scenes

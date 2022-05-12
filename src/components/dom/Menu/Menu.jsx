@@ -10,7 +10,7 @@ export default function Menu({ fullwidth }) {
         <Link href="/">
           <a className="inline-flex items-center">
             <span className='inline-flex mx-2 my-1'><Logo /></span>
-            <span className="text-xl text-white font-bold uppercase tracking-wide">WXRMP</span>
+            <h1 className="text-xl text-white font-bold uppercase tracking-wide">WXRMP</h1>
           </a>
         </Link>
         <button onClick={() => { setOpen(!open) }} className="inline-flex p-2 hover:bg-pink-400 text-white rounded ml-auto mr-2 md:hidden">
