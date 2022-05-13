@@ -19,7 +19,8 @@ const NumberInput = (props) => {
 }
 
 const SceneItem = (props) => {
-  const { url, scale, position, rotation } = props
+  const { sceneid, url, scale, position, rotation } = props
+  const { remove, patch } = props;
   return (<li className="flex flex-row border-b-2 bg-gray-200 border-slate-300 pb-1">
     <div className="w-12 p-2">
       <img className="object-cover" src={url} />
@@ -37,10 +38,10 @@ const SceneItem = (props) => {
           <input type="text" value={scale} className='text-xs p-0 px-1 w-16 rounded-sm bg-slate-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0' />
         </div>
         <div className="w-16 mr-2">
-          <button>❌ remove</button>
+          <button onClick={() => { remove(sceneid) }}>❌ remove</button>
         </div>
         <div className="w-16">
-          <button>🕐 reset</button>
+          <button onClick={() => { patch(sceneid, { rotation: [0, 0, 0], position: [0, 0, Math.random()] }) }}>🕐 reset</button>
         </div>
       </div>
 
@@ -50,12 +51,16 @@ const SceneItem = (props) => {
 
 export default function SceneEditor() {
   const scene = useStore(store => store.scene)
+  const [remove, add, patch] = useStore(store => [store.removeSceneItem, store.addSceneItem, store.patchSceneItem])
+  const actions = { remove, patch }
+
   return (
-    <div className="h-96">
-      <h2>Scene ID</h2>
+    <div className="h-96 md:h-auto">
+      <h2 className="hidden">Scene ID</h2>
       <ul>
-        {scene.map((item, v) => <SceneItem {...item} />)}
+        {scene.map((item, v) => <SceneItem {...item} {...actions} />)}
       </ul>
+      <button onClick={() => { add('image', [0, 0, 0], [0, 0, 0], '/scenes/wxrmp/web.png') }}>➕ Add</button>
     </div>
   )
 }

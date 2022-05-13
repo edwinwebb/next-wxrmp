@@ -1,4 +1,7 @@
 import create from 'zustand'
+import produce from 'immer'
+import { MathUtils } from 'three'
+import { devtools } from 'zustand/middleware'
 
 export interface SceneItem {
   sceneid: string
@@ -6,7 +9,7 @@ export interface SceneItem {
   rotation: [number, number, number]
   scale: number
   url: string
-  type: string
+  type: "video" | "image"
 }
 
 const WXRMP_LETTERS: Array<SceneItem> = [
@@ -54,12 +57,49 @@ const WXRMP_LETTERS: Array<SceneItem> = [
 
 interface Scene {
   scene: Array<SceneItem>;
-  router: String | null
+  router: String | null;
+  removeSceneItem: (id: string) => void;
+  addSceneItem: (type: string, position: [number, number, number], rotation: [number, number, number], url: string) => void;
+  patchSceneItem: (id: string, payload: SceneItem) => void;
 }
 
-const useStore = create<Scene>(() => ({
+const useStore = create<Scene>(devtools((set) => ({
   router: null,
-  scene: WXRMP_LETTERS
-}))
+  scene: WXRMP_LETTERS,
+  removeSceneItem: (sceneid: string) =>
+    set(
+      produce((draft) => {
+        const sceneindex = draft.scene.findIndex((item: SceneItem) => item.sceneid === sceneid)
+        draft.scene.splice(sceneindex, 1)
+      }),
+    ),
+  addSceneItem: (type, position, rotation, url: String = '/scenes/wxrmp/web.png') =>
+    set(
+      produce((draft) => {
+        const newItem = {
+          sceneid: MathUtils.generateUUID(),
+          position,
+          rotation,
+          scale: 1,
+          playing: false,
+          type,
+          url
+        }
+        draft.scene.push(newItem)
+      }),
+    ),
+  patchSceneItem: (sceneid, payload) =>
+    set(
+      produce((draft) => {
+        const index = draft.scene.findIndex((i: SceneItem) => i.sceneid === sceneid)
+        const item = draft.scene[index]
+        const updatedItem = {
+          ...item,
+          ...payload
+        }
+        draft.scene.splice(index, 1, updatedItem)
+      }),
+    ),
+})))
 
 export default useStore
