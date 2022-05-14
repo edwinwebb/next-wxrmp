@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import Menu from '@/components/dom/Menu/Menu'
 import FlatEditor from '@/components/dom/SceneEditor'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
