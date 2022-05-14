@@ -5,7 +5,7 @@ import Logo from "./Logo"
 export default function Menu({ fullwidth }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="bg-pink-300 h-12">
+    <div className="bg-pink-900 h-12">
       <nav className="flex items-center flex-wrap">
         <Link href="/">
           <a className="inline-flex items-center">
@@ -29,6 +29,9 @@ export default function Menu({ fullwidth }) {
             />
           </svg>
         </button>
+        <div>
+          <button className="rounded-md bg-pink-400 text-white">Create</button>
+        </div>
         <div className={`${open ? '' : 'hidden'} w-full md:visible md:inline-flex md:flex-grow md:w-auto`}>
           <div className="flex flex-col md:flex-row md:ml-auto mr-2">
             <Link href="/about">

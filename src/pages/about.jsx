@@ -1,5 +1,3 @@
-import Menu from '@/components/dom/Menu/Menu'
-
 const Page = () => {
   return (
     <>
