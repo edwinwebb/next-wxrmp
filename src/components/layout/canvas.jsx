@@ -6,7 +6,7 @@ const LCanvas = ({ children }) => {
   return (
     <VRCanvas>
       {/* <LControl /> */}
-      <color attach={'background'} args={[0x000000]} />
+      <color attach={'background'} args={[0x210414]} />
       <Preload all />
       {children}
       <OrbitControls />

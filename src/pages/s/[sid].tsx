@@ -1,3 +1,4 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import SceneControls from '@/components/dom/Scene/Controls'
@@ -14,9 +15,9 @@ const VREditor = dynamic(() => import('@/components/canvas/Editor'), {
 
 const SceneEditor = () => {
   return (
-    <div>
+    <div className='flex flex-col'>
       <SceneControls />
-      <SceneGraph />xw
+      <SceneGraph />
       <SceneProperties />
     </div>
 
@@ -46,7 +47,14 @@ const Page = () => {
 
 export default Page
 
-export async function getStaticProps() {
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: 'blocking' //indicates the type of fallback
+  }
+}
+
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       title: 'WXRMP - Scene',
