@@ -15,7 +15,7 @@ const VREditor = dynamic(() => import('@/components/canvas/Editor'), {
 
 const SceneEditor = () => {
   return (
-    <div className='flex flex-col'>
+    <div className='md:flex md:flex-col h-full'>
       <SceneControls />
       <SceneGraph />
       <SceneProperties />

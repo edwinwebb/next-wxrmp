@@ -18,7 +18,7 @@ const Vector3Form = (props: Vector3FormProps) => {
 }
 
 const Properties = () => {
-  return (<div className="bg-blackpink-900 text-white h-36">
+  return (<div className="bg-blackpink-900 text-white h-36 md:h-52">
     <Vector3Form vector={[1, 2, 3]} onChange={(v) => { console.log(v) }} label="position" />
   </div>)
 }
