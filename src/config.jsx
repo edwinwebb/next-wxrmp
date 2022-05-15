@@ -1,9 +1,8 @@
 import Head from 'next/head'
 
-const titleDefault = 'React Three Next Starter'
-const url = 'https://react-three-next.vercel.app/'
-const description =
-  'WebXR Media Player - Load and Play media in VR'
+const titleDefault = 'Web XR Media Player'
+const url = 'https://wxrmp.com/'
+const description = 'WebXR Media Player - Load and Play media in VR'
 const author = 'WXRMP'
 
 const Header = ({ title = titleDefault }) => {

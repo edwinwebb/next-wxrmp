@@ -46,7 +46,8 @@ Socials
 ## Development Files
 /src/pages/_app : Top level, header and balancer
 /src/layout/ : wrappers, dom and canvas
-/src/config : next head
+/src/config : next/head
+/src/pages/_document.jsx : include in each page
 
 ### Links and Resources
 

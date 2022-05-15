@@ -13,8 +13,10 @@ module.exports = {
         'blackpink-500': '#D91882',
         'blackpink-300': '#F21B91',
         'blackpink-100': '#FF1C99',
-
       },
+      fontFamily: {
+        'icon': ['"Material Icons"']
+      }
     },
   },
   variants: {
