@@ -6,16 +6,16 @@ Import and position Images and Videos into a custom VR space in your Browser. Ex
 
 ## Site Map
 MVP
-/home : app, make a scene, export it, import it
+/ : index : features / about
 /about : about the site
 /contact : send me an email, see out socials
+/s/[sid] : app, make a scene, save it, fork it
 
 MVP$
-/edit/id : make, save
-/publish/id : upload, pay to display
-/sell/id : charge for access
-/view/id : view a scene
-/buy/id : get access to a scene
+/u/[uid] : user page and list of published scenes
+/publish/[sid] : upload, pay to display, set costs
+/view/[sid] : view a scene without being able to edit it
+/buy/[sid] : get access to a scene
 
 ## TODO
 App
@@ -43,13 +43,10 @@ Socials
 - Discord
 - Instagram
 
-
-
-
 ## Development Files
 /src/pages/_app : Top level, header and balancer
 /src/layout/ : wrappers, dom and canvas
-
+/src/config : next head
 
 ### Links and Resources
 
