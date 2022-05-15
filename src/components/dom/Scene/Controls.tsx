@@ -13,6 +13,7 @@ const ControlButton = (props: ControlButtonProps) => {
 
 const Controls = () => {
   return (<div className="bg-blackpink-900 text-white h-18 py-1">
+    <span className="font-icon">account_tree</span>
     <ControlButton label="Save Scene" iconCode="save" />
     <ControlButton label="Fork Scene" iconCode="fork_right" />
     <ControlButton label="Add Item" iconCode="add" />
