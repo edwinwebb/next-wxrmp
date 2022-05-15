@@ -24,30 +24,52 @@ interface PropertyRowProps {
 
 const ProperyRow = (props: PropertyRowProps) => {
   const { label, children } = props
-  return (<div>
-    <div>
+  return (<div className="flex flex-row text-xs pb-1">
+    <div className="w-16">
       <span>{label}</span>
     </div>
-    <div>
+    <div className="w-34">
       {children}
     </div>
   </div>)
 }
 
+interface PropertyInputProps {
+  value: string
+}
+
+const PropertyInput = (props: PropertyInputProps) => {
+  const { value } = props
+  return (<input
+    type="text"
+    value={value}
+    className='
+      text-xs
+      text-black
+      p-0 
+      px-1 
+      w-52 
+      rounded-sm 
+      bg-slate-100 
+      border-transparent 
+      focus:border-gray-500 
+      focus:bg-white 
+      focus:ring-0'
+  />)
+}
+
+
+
 const Properties = () => {
   return (<div className="bg-blackpink-900 text-white h-36 md:h-52 lg:h-96">
     <ProperyRow label={"Name"}>
-      <input
-        type="text"
+      <PropertyInput
         value={'Image 1'}
-        className='text-xs'
       />
     </ProperyRow>
     <ProperyRow label={"URL"}>
-      <input
-        type="text"
-        value={'tgest url'}
-        className='text-xs'
+      <PropertyInput
+        value={'URL Value'}
       />
     </ProperyRow>
     <ProperyRow label={"Position"}>
@@ -57,7 +79,9 @@ const Properties = () => {
       <Vector3Form vector={[1, 2, 3]} onChange={(v) => { console.log(v) }} />
     </ProperyRow>
     <ProperyRow label={"Scale"}>
-      <input />
+      <PropertyInput
+        value={'0'}
+      />
     </ProperyRow>
   </div>)
 }
