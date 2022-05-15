@@ -1,31 +1,27 @@
 import Link from "next/link"
-import { useState } from "react"
-import Logo from "./Logo"
+import LogoImg from '../../../../public/img/wxrmp-logo.png'
+import Image from 'next/image'
 
-export default function Menu({ fullwidth }) {
-  const [open, setOpen] = useState(false)
+export default function Menu() {
   return (
-    <div className="bg-blackpink-800 h-12">
-      <nav className="flex items-center flex-wrap">
+    <nav className="bg-blackpink-800 h-11 flex flex-row w-screen items-center justify-between">
+      <div>
         <Link href="/">
-          <a className="inline-flex items-center">
-            <span className='inline-flex mx-2 my-1'><Logo /></span>
-            <h1 className="text-xl font-bold uppercase tracking-wide text-white">WXRMP</h1>
+          <a className="flex flex-row justify-center items-center h-11 pl-2">
+            <Image src={LogoImg} alt="WXRMP" height={36} width={36} />
+            <h1 className="pl-2 inline align-text-top text-xl font-bold uppercase tracking-wide text-white">WXRMP</h1>
           </a>
         </Link>
-        <div className={`hidden md:visible md:inline-flex md:flex-grow md:w-auto`}>
-          <div className="flex flex-col md:flex-row md:ml-auto mr-2">
-            <Link href="/about">
-              <a className="w-full px-3 py-2 text-white/90 hover:bg-pink-200 rounded">About</a>
-            </Link>
-            <Link href="/contact">
-              <a className="w-full px-3 py-2 text-white/90 hover:bg-pink-200 rounded">Contact</a>
-            </Link>
-            <button className="bg-pink-400 text-white rounded px-2 py-1 mt-1">Create</button>
-          </div>
-        </div>
-      </nav>
-
-    </div>
+      </div>
+      <div className="pr-2">
+        <Link href="/about">
+          <a className="invisible md:visible px-2 py-1 text-white/90 hover:bg-pink-200 rounded">About</a>
+        </Link>
+        <Link href="/contact">
+          <a className="invisible md:visible px-2 py-1 text-white/90 hover:bg-pink-200 rounded">Contact</a>
+        </Link>
+        <button className="bg-pink-400 text-white rounded px-2 py-1">Create</button>
+      </div>
+    </nav>
   )
 }
