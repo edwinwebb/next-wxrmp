@@ -1,5 +1,3 @@
-import { Children } from "react"
-
 interface Vector3FormProps {
   onChange: (triplet: [number, number, number]) => void
   vector: [number, number, number]
