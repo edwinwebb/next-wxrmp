@@ -7,8 +7,7 @@ import SceneProperties from '@/components/dom/Scene/Properties'
 import { firestore } from '@/firebase/clientApp';
 import { doc, getDoc, setDoc, addDoc, collection, Timestamp } from "@firebase/firestore";
 import { useEffect, useState } from 'react'
-import useStore from "@/helpers/store"
-
+import useStore, { Scene } from "@/helpers/store"
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -24,12 +23,16 @@ const Page = () => {
   const [isLoading, setLoading] = useState<boolean>(true)
   const [hasError, setError] = useState<boolean>(false)
   const scene = useStore(state => state.scene)
+  const replaceScene = useStore(state => state.replaceScene)
   const getScene = async (id: string) => {
     const docRef = doc(firestore, "scenes", id)
     const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
-      console.log(docSnap.data())
+      const data = { ...docSnap.data() } as Scene
+      //replaceScene(data)
+      console.log(data)
+
     } else {
       setError(true)
     }
@@ -37,15 +40,20 @@ const Page = () => {
     setLoading(false)
   }
   const forkScene = async () => {
-    console.log(scene);
-    return
-    // todo - change URL
+    // todo: rate limit
+    const docRef = await addDoc(collection(firestore, "scenes"), {
+      updated: Timestamp.fromDate(new Date()),
+      created: Timestamp.fromDate(new Date()),
+      items: scene.items
+    });
+    router.push('/s/' + docRef.id)
   }
   const saveScene = async () => {
     if (sid) {
       await setDoc(doc(firestore, 'scenes', sid.toString()), {
+        ...scene,
         updated: Timestamp.fromDate(new Date()),
-        scene
+        items: scene.items
       })
     } else {
       setError(true)
@@ -53,14 +61,14 @@ const Page = () => {
   }
 
   useEffect(() => {
+    console.log('use effect ' + sid)
     if (sid) {
       getScene(sid.toString())
     } else {
       setError(true)
     }
-  })
+  }, [sid])
 
-  // console.log(docSnap, pid)
   return (
     <>
       <div className='md:flex md:flex-col md:h-full md:border-r-2 md:border-r-blackpink-800'>
