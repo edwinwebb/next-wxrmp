@@ -5,7 +5,9 @@ import { devtools } from 'zustand/middleware'
 
 interface SceneStore {
   scene: Scene;
+  selectedItemKey: string;
   router: String | null;
+  setSelectedItemKey: (key: string) => void;
   removeSceneItem: (id: string) => void;
   addSceneItem: (type: string, position: [number, number, number], rotation: [number, number, number], url: string) => void;
   patchSceneItem: (id: string, payload: SceneItem) => void;
@@ -78,6 +80,16 @@ const WXRMP_LETTERS: Scene = {
 const useStore = create<SceneStore>(devtools((set) => ({
   router: null,
   scene: WXRMP_LETTERS,
+  selectedItemKey: '',
+  setSelectedItemKey: (itemKey) => {
+    set(
+      produce(draft => {
+        if (draft.scene.items.hasOwnProperty(itemKey)) {
+          draft.selectedItemKey = itemKey
+        }
+      })
+    )
+  },
   removeSceneItem: (sceneid) =>
     set(
       produce((draft) => {
