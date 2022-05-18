@@ -23,7 +23,7 @@ const Page = () => {
   const [isLoading, setLoading] = useState<boolean>(true)
   const [hasError, setError] = useState<boolean>(false)
   const scene = useStore(state => state.scene)
-  const replaceScene = useStore(state => state.replaceScene)
+  const [replaceScene, addSceneItem] = useStore(state => [state.replaceScene, state.addSceneItem])
   const getScene = async (id: string) => {
     const docRef = doc(firestore, "scenes", id)
     const docSnap = await getDoc(docRef)
@@ -72,7 +72,11 @@ const Page = () => {
   return (
     <>
       <div className='md:flex md:flex-col md:h-full md:border-r-2 md:border-r-blackpink-800'>
-        <SceneControls saveHandler={() => { saveScene() }} forkHandler={() => { forkScene() }} />
+        <SceneControls
+          saveHandler={() => { saveScene() }}
+          forkHandler={() => { forkScene() }}
+          addHandler={() => { addSceneItem('image', [0, 0, Math.random()], [0, 0, 0], '404') }}
+        />
         <SceneGraph />
         <SceneProperties />
       </div>

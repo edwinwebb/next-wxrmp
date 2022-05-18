@@ -4,6 +4,7 @@ interface GraphItemProps {
   name: string;
 }
 
+// todo : keyodwn delete 
 const GraphItem = (props: GraphItemProps) => {
   const { iconCode, selected, name } = props;
   return (

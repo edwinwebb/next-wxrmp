@@ -78,7 +78,7 @@ const useStore = create<SceneStore>(devtools((set) => ({
         delete draft[sceneid]
       }),
     ),
-  addSceneItem: (type = 'image', position = [0, 0, 0], rotation = [0, 0, 0], url: String = '/scenes/wxrmp/web.png') =>
+  addSceneItem: (type, position, rotation, url) =>
     set(
       produce((draft) => {
         draft.scene[MathUtils.generateUUID()] = {
