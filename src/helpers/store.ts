@@ -75,13 +75,13 @@ const useStore = create<SceneStore>(devtools((set) => ({
   removeSceneItem: (sceneid) =>
     set(
       produce((draft) => {
-        delete draft[sceneid]
+        delete draft.scene.items[sceneid]
       }),
     ),
   addSceneItem: (type, position, rotation, url) =>
     set(
       produce((draft) => {
-        draft.scene[MathUtils.generateUUID()] = {
+        draft.scene.items[MathUtils.generateUUID()] = {
           position,
           rotation,
           scale: 1,
@@ -93,8 +93,9 @@ const useStore = create<SceneStore>(devtools((set) => ({
   patchSceneItem: (sceneid, payload) =>
     set(
       produce((draft) => {
-        draft[sceneid] = {
-          ...draft[sceneid],
+        // draft.items
+        draft.scene.items[sceneid] = {
+          ...draft.scene.items[sceneid],
           ...payload
         }
       }),

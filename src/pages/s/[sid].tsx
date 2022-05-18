@@ -30,7 +30,7 @@ const Page = () => {
 
     if (docSnap.exists()) {
       const data = { ...docSnap.data() } as Scene
-      //replaceScene(data)
+      replaceScene(data)
       console.log(data)
 
     } else {
@@ -62,12 +62,15 @@ const Page = () => {
 
   useEffect(() => {
     console.log('use effect ' + sid)
+    debugger
     if (sid) {
       getScene(sid.toString())
     } else {
       setError(true)
     }
   }, [sid])
+
+  console.log(scene.items)
 
   return (
     <>
