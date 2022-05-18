@@ -1,3 +1,5 @@
+import useStore from "@/helpers/store"
+
 interface Vector3FormProps {
   onChange: (triplet: [number, number, number]) => void
   vector: [number, number, number]
@@ -6,7 +8,7 @@ interface Vector3FormProps {
 const Vector3Form = (props: Vector3FormProps) => {
   const { onChange, vector } = props
   const [x, y, z] = vector
-  const className = "text-xs w-16 p-0 px-1 mr-2 rounded-sm bg-slate-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+  const className = "text-xs text-black w-16 p-0 px-1 mr-2 rounded-sm bg-slate-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
 
   return (<div className="mb-1 text-xs">
     <input type="text" className={className} value={x} onChange={v => onChange([parseFloat(v.target.value), y, z])} />
@@ -59,26 +61,31 @@ const PropertyInput = (props: PropertyInputProps) => {
 
 
 const Properties = () => {
+  const selectedKey = useStore(state => state.selectedItemKey)
+  const items = useStore(state => state.scene.items)
+  const selectedItem = items[selectedKey]
+
+
   return (<div className="bg-blackpink-900 text-white h-36 md:h-52 lg:h-96">
     <ProperyRow label={"Name"}>
       <PropertyInput
-        value={'Image 1'}
+        value={selectedItem.label}
       />
     </ProperyRow>
     <ProperyRow label={"URL"}>
       <PropertyInput
-        value={'URL Value'}
+        value={selectedItem.url}
       />
     </ProperyRow>
     <ProperyRow label={"Position"}>
-      <Vector3Form vector={[1, 2, 3]} onChange={(v) => { console.log(v) }} />
+      <Vector3Form vector={selectedItem.position} onChange={(v) => { console.log(v) }} />
     </ProperyRow>
     <ProperyRow label={"Rotation"}>
-      <Vector3Form vector={[1, 2, 3]} onChange={(v) => { console.log(v) }} />
+      <Vector3Form vector={selectedItem.rotation} onChange={(v) => { console.log(v) }} />
     </ProperyRow>
     <ProperyRow label={"Scale"}>
       <PropertyInput
-        value={'0'}
+        value={selectedItem.scale.toString()}
       />
     </ProperyRow>
   </div>)
