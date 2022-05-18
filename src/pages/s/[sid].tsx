@@ -62,7 +62,6 @@ const Page = () => {
 
   useEffect(() => {
     console.log('use effect ' + sid)
-    debugger
     if (sid) {
       getScene(sid.toString())
     } else {

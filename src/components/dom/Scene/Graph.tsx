@@ -5,12 +5,13 @@ interface GraphItemProps {
   iconCode: string;
   selected: boolean;
   name: string;
-  deleteCallback: () => void
+  deleteCallback: () => void;
+  resetCallback: () => void
 }
 
 // todo : keyodwn delete 
 const GraphItem = (props: GraphItemProps) => {
-  const { iconCode, selected, name, deleteCallback } = props;
+  const { iconCode, selected, name, deleteCallback, resetCallback } = props;
   return (
     <li className={`${selected && 'bg-slate-800'} flex justify-between`}>
       <div className="">
@@ -18,7 +19,7 @@ const GraphItem = (props: GraphItemProps) => {
         <span>{name}</span>
       </div>
       <div className="">
-        <span className="font-icon">restart_alt</span>
+        <span className="font-icon" onClick={() => resetCallback()}>restart_alt</span>
         <span className="font-icon" onClick={() => deleteCallback()}>delete</span>
       </div>
     </li>
@@ -28,15 +29,18 @@ const GraphItem = (props: GraphItemProps) => {
 const Graph = () => {
   const { items } = useStore(state => state.scene)
   const remove = useStore(state => state.removeSceneItem)
+  const patch = useStore(state => state.patchSceneItem)
 
   const renderedItems = useMemo(() => {
     let array = []
-    for (const item in items) {
+    for (const itemKey in items) {
+      const { type, label } = items[itemKey]
       array.push(<GraphItem
-        iconCode="image"
+        iconCode={type === "image" ? "image" : "movie"}
         selected={false}
-        name={item}
-        deleteCallback={() => { console.log(item); remove(item) }}
+        name={label}
+        deleteCallback={() => { remove(itemKey) }}
+        resetCallback={() => { patch(itemKey, { ...items[itemKey], position: [0, 0, Math.random()], rotation: [0, 0, 0], scale: 1 }) }}
       />)
     } return array
   }, [items])
