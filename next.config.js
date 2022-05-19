@@ -9,6 +9,7 @@ const nextConfig = {
   webpack(config, { isServer }) {
 
     // audio support
+    // Todo - config.assetPrefix looks out of date
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,
       exclude: config.exclude,
@@ -32,6 +33,20 @@ const nextConfig = {
       test: /\.(glsl|vs|fs|vert|frag)$/,
       exclude: /node_modules/,
       use: ['raw-loader', 'glslify-loader'],
+    })
+
+    config.module.rules.push({
+      test: /\.(otf)$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: require.resolve('file-loader'),
+        options: {
+          publicPath: `/_next/static/fonts/`,
+          outputPath: `${isServer ? '../' : ''}static/fonts/`,
+          name: '[name]-[hash].[ext]',
+          esModule: false,
+        },
+      }]
     })
 
     return config

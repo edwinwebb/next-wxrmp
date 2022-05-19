@@ -69,8 +69,6 @@ const Page = () => {
     }
   }, [sid])
 
-  console.log(scene.items)
-
   return (
     <>
       <div className='md:flex md:flex-col md:h-full md:border-r-2 md:border-r-blackpink-800'>
