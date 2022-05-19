@@ -6,10 +6,10 @@ interface ControlButtonProps {
 
 const ControlButton = (props: ControlButtonProps) => {
   const { label, iconCode, onClick } = props
-  return (<span onClick={() => { onClick() }}>
-    <span className="font-icon">{iconCode}</span>
-    <span className="hidden invisible">{label}</span>
-  </span>)
+  return (<button className="text-sm rounded border-blackpink-800 mr-2 px-2 border-2 box-border hover:border-blackpink-300 hover:bg-blackpink-500 " onClick={() => { onClick() }}>
+    <span className="font-icon mr-1">{iconCode}</span>
+    <span className="text-xs">{label}</span>
+  </button>)
 }
 
 interface SceneControlProps {
@@ -20,15 +20,11 @@ interface SceneControlProps {
 
 const Controls = (props: SceneControlProps) => {
   const { saveHandler, forkHandler, addHandler } = props
-  return (<div className="bg-blackpink-900 text-white h-18 py-1 flex flex-row justify-between">
+  return (<div className="bg-blackpink-900 text-white h-18 py-2 flex flex-row-reverse border-blackpink-800 border-b-2">
     <div>
-      <span className="font-icon">account_tree</span>
-      <span>SCENE_ID</span>
-    </div>
-    <div>
-      <ControlButton label="Save Scene" iconCode="save" onClick={() => saveHandler()} />
-      <ControlButton label="Fork Scene" iconCode="fork_right" onClick={() => forkHandler()} />
-      <ControlButton label="Add Item" iconCode="add" onClick={() => addHandler()} />
+      <ControlButton label="Save" iconCode="save" onClick={() => saveHandler()} />
+      <ControlButton label="Fork" iconCode="fork_right" onClick={() => forkHandler()} />
+      <ControlButton label="Add" iconCode="add" onClick={() => addHandler()} />
     </div>
   </div>)
 }

@@ -16,4 +16,8 @@
     padding: 0;
     overflow: hidden;
   }
+
+  .font-icon {
+    vertical-align: top
+  }
 }

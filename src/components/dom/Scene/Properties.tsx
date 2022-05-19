@@ -10,16 +10,17 @@ const checkNumber = (v: string): number => {
   return isNaN(n) ? 0 : n
 }
 
+// this has to be an antipattern
+const inputClassName = "text-xs text-white w-16 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent focus:border-gray-900 focus:bg-slate-800 focus:ring-0"
+
 const Vector3Form = (props: Vector3FormProps) => {
   const { onChange, vector } = props
   const [x, y, z] = vector
-  const className = "text-xs text-black w-16 p-0 px-1 mr-2 rounded-sm bg-slate-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-
 
   return (<div className="mb-1 text-xs">
-    <input type="text" className={className} value={x} onChange={v => onChange([checkNumber(v.target.value), y, z])} />
-    <input type="text" className={className} value={y} onChange={v => onChange([x, checkNumber(v.target.value), z])} />
-    <input type="text" className={className} value={z} onChange={v => onChange([x, y, checkNumber(v.target.value)])} />
+    <input type="text" className={inputClassName} value={x} onChange={v => onChange([checkNumber(v.target.value), y, z])} />
+    <input type="text" className={inputClassName} value={y} onChange={v => onChange([x, checkNumber(v.target.value), z])} />
+    <input type="text" className={inputClassName} value={z} onChange={v => onChange([x, y, checkNumber(v.target.value)])} />
   </div>)
 }
 
@@ -30,8 +31,8 @@ interface PropertyRowProps {
 
 const ProperyRow = (props: PropertyRowProps) => {
   const { label, children } = props
-  return (<div className="flex flex-row text-xs pb-1">
-    <div className="w-16">
+  return (<div className="flex flex-row text-xs py-1 md:py-2 px-2">
+    <div className="w-20 p-1">
       <span>{label}</span>
     </div>
     <div className="w-34">
@@ -45,28 +46,16 @@ interface PropertyInputProps {
   onChange: (value: string) => void
 }
 
+// TODO - this should be used in Vector3 form?
 const PropertyInput = (props: PropertyInputProps) => {
   const { value, onChange } = props
   return (<input
     type="text"
     value={value}
     onChange={e => onChange(e.target.value)}
-    className='
-      text-xs
-      text-black
-      p-0 
-      px-1 
-      w-52 
-      rounded-sm 
-      bg-slate-100 
-      border-transparent 
-      focus:border-gray-500 
-      focus:bg-white 
-      focus:ring-0'
+    className={`${inputClassName} w-52`}
   />)
 }
-
-
 
 const Properties = () => {
   const selectedKey = useStore(state => state.selectedItemKey)

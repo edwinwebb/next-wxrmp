@@ -77,7 +77,7 @@ const Page = () => {
         <SceneControls
           saveHandler={() => { saveScene() }}
           forkHandler={() => { forkScene() }}
-          addHandler={() => { addSceneItem('image', [0, 0, Math.random()], [0, 0, 0], '404') }}
+          addHandler={() => { addSceneItem('image', 'new item', [0, 0, Math.random()], [0, 0, 0], '404') }}
         />
         <SceneGraph />
         <SceneProperties />

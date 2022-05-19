@@ -9,7 +9,7 @@ interface SceneStore {
   router: String | null;
   setSelectedItemKey: (key: string) => void;
   removeSceneItem: (id: string) => void;
-  addSceneItem: (type: string, position: [number, number, number], rotation: [number, number, number], url: string) => void;
+  addSceneItem: (type: "video" | "image", label: string, position: [number, number, number], rotation: [number, number, number], url: string) => void;
   patchSceneItem: (id: string, payload: SceneItem) => void;
   replaceScene: (payload: Scene) => void;
 }
@@ -99,16 +99,18 @@ const useStore = create<SceneStore>(devtools((set) => ({
         delete draft.scene.items[sceneid]
       }),
     ),
-  addSceneItem: (type, position, rotation, url) =>
+  addSceneItem: (type, label, position, rotation, url) =>
     set(
       produce((draft) => {
-        draft.scene.items[MathUtils.generateUUID()] = {
+        const newItem: SceneItem = {
+          label,
           position,
           rotation,
           scale: 1,
           type,
           url
         }
+        draft.scene.items[MathUtils.generateUUID()] = newItem
       }),
     ),
   patchSceneItem: (sceneid, payload) =>

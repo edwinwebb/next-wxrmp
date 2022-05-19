@@ -14,14 +14,16 @@ interface GraphItemProps {
 const GraphItem = (props: GraphItemProps) => {
   const { iconCode, selected, name, deleteCallback, resetCallback, selectedCallback } = props;
   return (
-    <li className={`${selected && 'bg-slate-800'} flex justify-between`} onClick={(e) => { e.stopPropagation(); selectedCallback() }}>
+    <li
+      className={`${selected && 'bg-slate-800'} flex justify-between rounded-sm px-2 md:py-1 md:my-1 cursor-pointer`}
+      onClick={(e) => { e.stopPropagation(); selectedCallback() }}>
       <div className="">
-        <span className="font-icon">{iconCode}</span>
-        <span>{name}</span>
+        <span className="font-icon mr-2">{iconCode}</span>
+        <span className="text-sm">{name}</span>
       </div>
-      <div className="">
-        <span className="font-icon" onClick={(e) => { e.stopPropagation(); resetCallback() }}>restart_alt</span>
-        <span className="font-icon" onClick={(e) => { e.stopPropagation(); deleteCallback() }}>delete</span>
+      <div className={` ${selected ? 'visible' : 'invisible'} `}>
+        <button className="font-icon mr-2 hover:text-blackpink-300" onClick={(e) => { e.stopPropagation(); resetCallback() }}>restart_alt</button>
+        <button className="font-icon hover:text-blackpink-300" onClick={(e) => { e.stopPropagation(); deleteCallback() }}>delete</button>
       </div>
     </li>
   )
@@ -39,6 +41,7 @@ const Graph = () => {
     for (const itemKey in items) {
       const { type, label } = items[itemKey]
       array.push(<GraphItem
+        key={'sg_' + itemKey}
         iconCode={type === "image" ? "image" : "movie"}
         selected={itemKey === selectedKey}
         name={label}
@@ -50,8 +53,10 @@ const Graph = () => {
     return array
   }, [items, selectedKey])
 
-  return (<div className="bg-blackpink-900 text-white h-52 md:flex-grow" onClick={(e) => { e.stopPropagation(); setSelected('') }} >
-    <ul>
+  return (<div
+    className="bg-blackpink-900 text-white h-52 md:flex-grow box-border border-b-2 border-blackpink-800"
+    onClick={(e) => { e.stopPropagation(); setSelected('') }} >
+    <ul className="p-2">
       {renderedItems}
     </ul>
   </div>)
