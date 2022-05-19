@@ -5,14 +5,16 @@ interface Vector3FormProps {
   vector: [number, number, number]
 }
 
+const checkNumber = (v: string): number => {
+  const n = parseFloat(v)
+  return isNaN(n) ? 0 : n
+}
+
 const Vector3Form = (props: Vector3FormProps) => {
   const { onChange, vector } = props
   const [x, y, z] = vector
   const className = "text-xs text-black w-16 p-0 px-1 mr-2 rounded-sm bg-slate-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-  const checkNumber = (v: string): number => {
-    const n = parseFloat(v)
-    return isNaN(n) ? 0 : n
-  }
+
 
   return (<div className="mb-1 text-xs">
     <input type="text" className={className} value={x} onChange={v => onChange([checkNumber(v.target.value), y, z])} />
@@ -96,7 +98,7 @@ const Properties = () => {
     </ProperyRow>
     <ProperyRow label={"Scale"}>
       <PropertyInput
-        onChange={(v) => patchItem(selectedKey, { ...selectedItem, scale: parseFloat(v) })}
+        onChange={(v) => patchItem(selectedKey, { ...selectedItem, scale: checkNumber(v) })}
         value={selectedItem.scale.toString()}
       />
     </ProperyRow>
