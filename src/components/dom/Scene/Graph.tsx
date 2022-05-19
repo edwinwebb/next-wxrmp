@@ -14,7 +14,7 @@ interface GraphItemProps {
 const GraphItem = (props: GraphItemProps) => {
   const { iconCode, selected, name, deleteCallback, resetCallback, selectedCallback } = props;
   return (
-    <li className={`${selected && 'bg-slate-800'} flex justify-between`} onClick={() => { selectedCallback() }}>
+    <li className={`${selected && 'bg-slate-800'} flex justify-between`} onClick={(e) => { e.stopPropagation(); selectedCallback() }}>
       <div className="">
         <span className="font-icon">{iconCode}</span>
         <span>{name}</span>
@@ -50,7 +50,7 @@ const Graph = () => {
     return array
   }, [items, selectedKey])
 
-  return (<div className="bg-blackpink-900 text-white h-52 md:flex-grow">
+  return (<div className="bg-blackpink-900 text-white h-52 md:flex-grow" onClick={(e) => { e.stopPropagation(); setSelected('') }} >
     <ul>
       {renderedItems}
     </ul>

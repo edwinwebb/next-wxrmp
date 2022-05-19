@@ -86,7 +86,10 @@ const useStore = create<SceneStore>(devtools((set) => ({
       produce(draft => {
         if (draft.scene.items.hasOwnProperty(itemKey)) {
           draft.selectedItemKey = itemKey
+        } else if (itemKey === '') {
+          draft.selectedItemKey = itemKey
         }
+
       })
     )
   },
