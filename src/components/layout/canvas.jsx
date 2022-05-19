@@ -1,5 +1,4 @@
 import { VRCanvas } from '@react-three/xr'
-import { OrbitControls, Preload } from '@react-three/drei'
 
 // https://github.com/pmndrs/drei#preload
 const LCanvas = ({ children }) => {
@@ -7,9 +6,7 @@ const LCanvas = ({ children }) => {
     <VRCanvas>
       {/* <LControl /> */}
       <color attach={'background'} args={[0x210414]} />
-      <Preload all />
       {children}
-      <OrbitControls />
     </VRCanvas>
   )
 }
