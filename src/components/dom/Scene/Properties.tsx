@@ -57,6 +57,7 @@ const PropertyInput = (props: PropertyInputProps) => {
   />)
 }
 
+// TODO - vlaue to store not on change but on enter
 const Properties = () => {
   const selectedKey = useStore(state => state.selectedItemKey)
   const items = useStore(state => state.scene.items)
