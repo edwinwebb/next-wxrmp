@@ -7,14 +7,13 @@ import { useInteraction, useXR, XRController } from '@react-three/xr'
 
 interface MoveButtonProps {
   targetRef: MutableRefObject<Group>
-  sceneid: string
   position?: [number, number, number]
   aspect?: number
   onMoved: (position: [number, number, number], rotation: [number, number, number]) => void
 }
 
 export function Move(props: MoveButtonProps) {
-  const { targetRef, sceneid, onMoved } = props
+  const { targetRef, onMoved } = props
   const [isMoveSelect, setController] = useState<XRController | undefined>(undefined)
   const [distanceFromClick, setDistanceToMouse] = useState<number | undefined>(undefined)
   const dummyvec: Vector3 = useMemo(() => new Vector3(), [])
@@ -63,7 +62,7 @@ export function Move(props: MoveButtonProps) {
       onSelectEnd={() => {
         if (isMoveSelect) {
           const r = targetRef.current.rotation;
-          onMoved(sceneid, targetRef.current.position.toArray(), [r.x, r.y, r.z])
+          onMoved(targetRef.current.position.toArray(), [r.x, r.y, r.z])
         }
         setController(undefined)
       }}
@@ -75,7 +74,7 @@ export function Move(props: MoveButtonProps) {
         e.stopPropagation()
         if (distanceFromClick) {
           const r = targetRef.current.rotation;
-          onMoved(sceneid, targetRef.current.position.toArray(), [r.x, r.y, r.z])
+          onMoved(targetRef.current.position.toArray(), [r.x, r.y, r.z])
         }
         setDistanceToMouse(undefined)
       }}

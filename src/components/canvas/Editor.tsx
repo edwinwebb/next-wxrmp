@@ -3,7 +3,7 @@ import { PlayerControls } from "@/components/canvas/Controls/PlayerControls"
 import { Icon } from "@/components/canvas/UI/Icon"
 import useStore from "@/helpers/store"
 import { useMemo } from "react"
-import { Image } from '@/components/canvas/SceneItems/Image'
+import { ImageSceneItem } from '@/components/canvas/SceneItems/Image'
 import { useThree } from "@react-three/fiber"
 
 function StoreScene() {
@@ -15,27 +15,21 @@ function StoreScene() {
     for (const itemKey in items) {
       const { url, position, rotation, scale } = items[itemKey]
       array.push(
-        <group
+        <ImageSceneItem
           key={itemKey}
           position={position}
           rotation={rotation}
           scale={scale}
           name={itemKey}
-          onClick={(e) => { select(itemKey) }}
-        >
-          <Image
-            url={url}
-            aspectCallback={(aspect) => { console.log(aspect) }}
-            selected={itemKey === selectedKey}
-          />
-        </group>)
+          url={url}
+          selected={false}
+        />)
     }
     return array
   }, [items, selectedKey])
 
   return <>{renderedItems}</>
 }
-
 
 const App = () => {
   return (<>
