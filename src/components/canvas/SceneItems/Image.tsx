@@ -29,7 +29,7 @@ function ImagePlane(props: ImagePlaneProps) {
   return (
     <mesh scale={[1, aspect, 1]}>
       <planeBufferGeometry args={[1, 1]} />
-      <meshStandardMaterial map={texture} attach="material" side={DoubleSide} transparent={true} color="grey" />
+      <meshBasicMaterial map={texture} attach="material" side={DoubleSide} transparent={true} color="white" toneMapped={false} />
       <Edges color={'hotpink'} scale={1.1} visible={selected} />
     </mesh>
   )
