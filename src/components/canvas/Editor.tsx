@@ -39,14 +39,8 @@ function StoreScene() {
 
 const App = () => {
   return (<>
-    <pointLight position={[4, 4, 4]} />
-    <ambientLight intensity={.2} />
     <PlayerControls />
-    <Icon position={[0, 2, -5]} color={0xFFFFFF} />
     <StoreScene />
-    <Box position={[0, 2, -10]}>
-      <meshPhysicalMaterial color="hotpink" />
-    </Box>
   </>)
 }
 
