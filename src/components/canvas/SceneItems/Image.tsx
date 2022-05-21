@@ -43,7 +43,6 @@ interface ImageProps {
 
 export function Image(props: ImageProps) {
   const { url = DEFAULT_URL, aspectCallback = () => { }, selected } = props
-  console.log(url)
   return (
     <ErrorBoundary fallback={<Icon iconkey="error" fontSize={1} color={0x888888} />}>
       <Suspense fallback={<Icon iconkey="image" fontSize={1} color={0x888888} />}>
@@ -83,7 +82,7 @@ export function ImageSceneItem({ position, rotation, scale, name, url, selected 
         onBlur={() => {
           setHover(false)
         }}>
-        <ImagePlane aspectCallback={(ratio) => setChildAspect(ratio)} url={url} selected={true} />
+        <Image aspectCallback={(ratio) => setChildAspect(ratio)} url={url} selected={true} />
         <group visible={isHover} position={[0, 0, 0.0051]}>
           <Move targetRef={groupRef} onMoved={(p, r) => { console.log(p, r) }} />
           <Resize targetRef={groupRef} position={[0.4, childAspect / 2 - 0.1, 0]} onResize={s => console.log(s)} />
