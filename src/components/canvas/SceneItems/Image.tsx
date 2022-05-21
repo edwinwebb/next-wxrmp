@@ -43,9 +43,10 @@ interface ImageSceneItemProps {
   onMove: (position: [number, number, number], rotation: [number, number, number]) => void
   onScale: (scale: number) => void
   onDelete: (key: string) => void
+  onSelect: (key: string) => void
 }
 
-export function ImageSceneItem({ position, rotation, scale, name, url, selected, onMove, onScale, onDelete }: ImageSceneItemProps) {
+export function ImageSceneItem({ position, rotation, scale, name, url, selected, onMove, onScale, onDelete, onSelect }: ImageSceneItemProps) {
   const groupRef = useRef<Group>(null!)
   const [childAspect, setChildAspect] = useState(1)
   const [isHover, setHover] = useState(false)
@@ -57,6 +58,7 @@ export function ImageSceneItem({ position, rotation, scale, name, url, selected,
       rotation={rotation}
       scale={[scale, scale, scale]}
       name={name}
+      onClick={() => { onSelect(name) }}
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}>
       <Interactive

@@ -49,9 +49,9 @@ export function PlayerControls() {
       <DefaultXRControllers />
       <Sphere
         args={[100, 100, 32]}
-        onPointerDown={(e) => { console.log(e.nativeEvent); setDown([mouse.x, mouse.y, camera.rotation.x, camera.rotation.y]) }}
-        onPointerUp={() => { console.log('up'); setDown([0, 0]) }}
-        onPointerOut={() => { console.log('out'); setDown([0, 0]) }}
+        onPointerDown={(e) => { setDown([mouse.x, mouse.y, camera.rotation.x, camera.rotation.y]) }}
+        onPointerUp={() => { setDown([0, 0]) }}
+        onPointerOut={() => { setDown([0, 0]) }}
       >
         <meshBasicMaterial side={DoubleSide} visible={false} color={'hotpink'} />
       </Sphere>

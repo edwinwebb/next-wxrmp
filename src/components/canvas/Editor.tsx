@@ -14,19 +14,19 @@ function StoreScene() {
     for (const itemKey in items) {
       const { url, position, rotation, scale } = items[itemKey]
       array.push(
-        <group onClick={() => { select(itemKey) }}>
-          <ImageSceneItem
-            key={itemKey}
-            position={position}
-            rotation={rotation}
-            scale={scale}
-            name={itemKey}
-            url={url}
-            selected={selectedKey === itemKey}
-            onMove={(position, rotation) => { patchItem(itemKey, { ...items[itemKey], position, rotation }) }}
-            onScale={(scale) => { patchItem(itemKey, { ...items[itemKey], scale }) }}
-            onDelete={key => { deleteItem(key) }}
-          /></group>)
+        <ImageSceneItem
+          key={itemKey}
+          position={position}
+          rotation={rotation}
+          scale={scale}
+          name={itemKey}
+          url={url}
+          selected={selectedKey === itemKey}
+          onMove={(position, rotation) => { patchItem(itemKey, { ...items[itemKey], position, rotation }) }}
+          onScale={(scale) => { patchItem(itemKey, { ...items[itemKey], scale }) }}
+          onDelete={key => { deleteItem(key) }}
+          onSelect={() => { select(itemKey) }}
+        />)
     }
     return array
   }, [items, selectedKey])
