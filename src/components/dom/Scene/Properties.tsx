@@ -11,16 +11,22 @@ const checkNumber = (v: string): number => {
 }
 
 // this has to be an antipattern
-const inputClassName = "text-xs text-white w-16 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent focus:border-gray-900 focus:bg-slate-800 focus:ring-0"
+const inputClassName = "text-xs text-white w-16 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent focus:border-gray-900 focus:bg-slate-800"
 
 const Vector3Form = (props: Vector3FormProps) => {
   const { onChange, vector } = props
   const [x, y, z] = vector
 
   return (<div className="mb-1 text-xs">
-    <input type="text" className={inputClassName} value={x} onChange={v => onChange([checkNumber(v.target.value), y, z])} />
-    <input type="text" className={inputClassName} value={y} onChange={v => onChange([x, checkNumber(v.target.value), z])} />
-    <input type="text" className={inputClassName} value={z} onChange={v => onChange([x, y, checkNumber(v.target.value)])} />
+    <span className="relative before:content-['X'] before:ml-0.5 before:text-green-600 before:absolute before:left-1 before:py-1 before:align-middle before:text-xs">
+      <input type="text" className={inputClassName + ' pl-4'} value={x} onChange={v => onChange([checkNumber(v.target.value), y, z])} />
+    </span>
+    <span className="relative before:content-['Y'] before:ml-0.5 before:text-red-600 before:absolute before:left-1 before:py-1 before:align-middle before:text-xs">
+      <input type="text" className={inputClassName + ' pl-4'} value={y} onChange={v => onChange([x, checkNumber(v.target.value), z])} />
+    </span>
+    <span className="relative before:content-['Z'] before:ml-0.5 before:text-blue-600 before:absolute before:left-1 before:py-1 before:align-middle before:text-xs">
+      <input type="text" className={inputClassName + ' pl-4'} value={z} onChange={v => onChange([x, y, checkNumber(v.target.value)])} />
+    </span>
   </div>)
 }
 
