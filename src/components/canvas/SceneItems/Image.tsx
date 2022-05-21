@@ -5,10 +5,7 @@ import { Icon } from '@/components/canvas/UI/Icon'
 import { ErrorBoundary } from '@/helpers/ErrorBoundary'
 import { Move, Resize } from '@/components/canvas/SceneItems/LinkedButtons'
 import { Interactive } from '@react-three/xr'
-import { ButtonRow, Button } from '@/components/canvas/UI/Buttons'
-
-
-const DEFAULT_URL = './test-images/404-image.png'
+import { Button } from '@/components/canvas/UI/Buttons'
 
 interface ImagePlaneProps {
   url: string;
@@ -17,8 +14,9 @@ interface ImagePlaneProps {
 }
 
 // todo - bad pattern with aspect calculation
+// update may 2022 not sure what the bad pattern is
 function ImagePlane(props: ImagePlaneProps) {
-  const { url = DEFAULT_URL, aspectCallback = () => { }, selected } = props
+  const { url, aspectCallback, selected } = props
   const texture = useTexture(url)
   const aspect = texture.image.height / texture.image.width
 
@@ -35,33 +33,19 @@ function ImagePlane(props: ImagePlaneProps) {
   )
 }
 
-interface ImageProps {
-  url: string
-  aspectCallback: (apect: number) => void
-  selected: boolean
-}
-
-export function Image(props: ImageProps) {
-  const { url = DEFAULT_URL, aspectCallback = () => { }, selected } = props
-  return (
-    <ErrorBoundary fallback={<Icon iconkey="error" fontSize={1} color={0x888888} />}>
-      <Suspense fallback={<Icon iconkey="image" fontSize={1} color={0x888888} />}>
-        <ImagePlane url={url} aspectCallback={aspectCallback} selected={selected} />
-      </Suspense>
-    </ErrorBoundary>
-  )
-}
-
 interface ImageSceneItemProps {
   position: [number, number, number]
   rotation: [number, number, number]
   scale: number
   name: string
   url: string
-  selected: boolean
+  selected: boolean,
+  onMove: (position: [number, number, number], rotation: [number, number, number]) => void
+  onScale: (scale: number) => void
+  onDelete: (key: string) => void
 }
 
-export function ImageSceneItem({ position, rotation, scale, name, url, selected }: ImageSceneItemProps) {
+export function ImageSceneItem({ position, rotation, scale, name, url, selected, onMove, onScale, onDelete }: ImageSceneItemProps) {
   const groupRef = useRef<Group>(null!)
   const [childAspect, setChildAspect] = useState(1)
   const [isHover, setHover] = useState(false)
@@ -82,18 +66,22 @@ export function ImageSceneItem({ position, rotation, scale, name, url, selected 
         onBlur={() => {
           setHover(false)
         }}>
-        <Image aspectCallback={(ratio) => setChildAspect(ratio)} url={url} selected={true} />
+        <ErrorBoundary fallback={<Icon iconkey="error" fontSize={1} color={0x888888} />}>
+          <Suspense fallback={<Icon iconkey="image" fontSize={1} color={0x888888} />}>
+            <ImagePlane url={url} aspectCallback={(aspect) => setChildAspect(aspect)} selected={selected} />
+          </Suspense>
+        </ErrorBoundary>
         <group visible={isHover} position={[0, 0, 0.0051]}>
-          <Move targetRef={groupRef} onMoved={(p, r) => { console.log(p, r) }} />
-          <Resize targetRef={groupRef} position={[0.4, childAspect / 2 - 0.1, 0]} onResize={s => console.log(s)} />
+          <Move targetRef={groupRef} onMoved={(p, r) => { onMove(p, r) }} />
+          <Resize targetRef={groupRef} position={[0.4, childAspect / 2 - 0.1, 0]} onResize={s => onScale(s)} />
           <Button
             iconkey="delete"
-            position-y={childAspect / -2 + 0.03}
+            position={[0, childAspect / -2 + 0.03, 0]}
             onSelect={() => {
-              console.log(name)
+              onDelete(name)
             }}
             onClick={() => {
-              console.log(name)
+              onDelete(name)
             }}
           />
         </group>
