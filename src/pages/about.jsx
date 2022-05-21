@@ -16,9 +16,15 @@ const Page = () => {
         <h2>Earn some coin</h2>
         <p>Charge a fee to share your media on our platform</p>
         <h2>Privacy First</h2>
-        <p>We won't share your media without your consent</p>
-        <p></p>
+        <p>You choose to make your media discoverable</p>
+        <h2>Performace</h2>
+        <p>We focus on performance, more media is more fun</p>
+        <h2>HTML Standards</h2>
+        <p>Access the site from any device on any platform</p>
+        <h2>UX</h2>
+        <p>Easy to use and consistent across devices</p>
       </div>
+      <div></div>
     </>
   )
 }
