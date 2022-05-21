@@ -31,8 +31,6 @@ const Page = () => {
     if (docSnap.exists()) {
       const data = { ...docSnap.data() } as Scene
       replaceScene(data)
-      console.log(data)
-
     } else {
       setError(true)
     }
@@ -50,6 +48,7 @@ const Page = () => {
   }
   const saveScene = async () => {
     if (sid) {
+      console.log(scene)
       await setDoc(doc(firestore, 'scenes', sid.toString()), {
         ...scene,
         updated: Timestamp.fromDate(new Date()),
@@ -61,9 +60,10 @@ const Page = () => {
   }
 
   useEffect(() => {
-    console.log('use effect ' + sid)
     if (sid) {
       getScene(sid.toString())
+    } if (sid === "new") {
+      forkScene()
     } else {
       setError(true)
     }
@@ -98,7 +98,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      title: 'WXRMP - Scene',
+      title: 'WXRMP - Scene Editor',
     },
   }
 }

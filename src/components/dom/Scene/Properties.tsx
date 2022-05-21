@@ -1,4 +1,5 @@
 import useStore from "@/helpers/store"
+import GlobalProperies from './Globals'
 
 interface Vector3FormProps {
   onChange: (triplet: [number, number, number]) => void
@@ -70,8 +71,10 @@ const Properties = () => {
   const patchItem = useStore(state => state.patchSceneItem)
   const selectedItem = items[selectedKey]
 
-  // todo - replace with global properties
-  if (!selectedItem) return (<div className="bg-blackpink-900 text-white h-36 md:h-52 lg:h-96"></div>)
+  // todo - replace with a switch once we have more props
+  if (!selectedItem) return (<div className="bg-blackpink-900 text-white h-36 md:h-64 lg:h-96">
+    <GlobalProperies />
+  </div>)
 
   return (<div className="bg-blackpink-900 text-white h-36 md:h-52 lg:h-96">
     <ProperyRow label={"Name"}>

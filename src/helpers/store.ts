@@ -12,6 +12,7 @@ interface SceneStore {
   addSceneItem: (type: "video" | "image", label: string, position: [number, number, number], rotation: [number, number, number], url: string) => void;
   patchSceneItem: (id: string, payload: SceneItem) => void;
   replaceScene: (payload: Scene) => void;
+  setSceneGlobals: (name: string, description: string, backgroundcolor: string) => void;
 }
 
 export interface SceneItem {
@@ -26,10 +27,16 @@ export interface SceneItem {
 export interface Scene {
   updated: string;
   created: string;
+  name: string;
+  description: string;
+  backgroundcolor: string;
   items: Record<string, SceneItem>
 }
 
 const WXRMP_LETTERS: Scene = {
+  name: 'Scene',
+  description: 'The default WXRMP scene',
+  backgroundcolor: '#111111',
   updated: '0',
   created: '0',
   items: {
@@ -93,15 +100,23 @@ const useStore = create<SceneStore>(devtools((set) => ({
       })
     )
   },
+  setSceneGlobals: (name, description, backgroundcolor) =>
+    set(
+      produce((draft: SceneStore) => {
+        draft.scene.backgroundcolor = backgroundcolor
+        draft.scene.name = name
+        draft.scene.description = description
+      })
+    ),
   removeSceneItem: (sceneid) =>
     set(
-      produce((draft) => {
+      produce((draft: SceneStore) => {
         delete draft.scene.items[sceneid]
       }),
     ),
   addSceneItem: (type, label, position, rotation, url) =>
     set(
-      produce((draft) => {
+      produce((draft: SceneStore) => {
         const newItem: SceneItem = {
           label,
           position,
@@ -115,8 +130,7 @@ const useStore = create<SceneStore>(devtools((set) => ({
     ),
   patchSceneItem: (sceneid, payload) =>
     set(
-      produce((draft) => {
-        // draft.items
+      produce((draft: SceneStore) => {
         draft.scene.items[sceneid] = {
           ...draft.scene.items[sceneid],
           ...payload
@@ -125,7 +139,7 @@ const useStore = create<SceneStore>(devtools((set) => ({
     ),
   replaceScene: (payload) =>
     set(
-      produce((draft) => {
+      produce((draft: SceneStore) => {
         draft.scene = payload
       }),
     ),

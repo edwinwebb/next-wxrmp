@@ -20,7 +20,7 @@ export default function Menu() {
         <Link href="/contact">
           <a className="invisible md:visible px-2 py-1 text-white/90 hover:bg-pink-200 rounded">Contact</a>
         </Link>
-        <button className="bg-pink-400 text-white rounded px-2 py-1">Create</button>
+        <Link href="/s/new"><button className="bg-pink-400 text-white rounded px-2 py-1">Create</button></Link>
       </div>
     </nav>
   )
