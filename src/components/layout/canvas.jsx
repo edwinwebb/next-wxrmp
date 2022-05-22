@@ -4,7 +4,6 @@ import { VRCanvas } from '@react-three/xr'
 const LCanvas = ({ children }) => {
   return (
     <VRCanvas dpr={[1, 2]}>
-      <color attach={'background'} args={[0xFFFFFF]} />
       {children}
     </VRCanvas>
   )

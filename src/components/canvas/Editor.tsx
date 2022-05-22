@@ -5,6 +5,7 @@ import { ImageSceneItem } from '@/components/canvas/SceneItems/Image'
 
 function StoreScene() {
   const items = useStore((s) => s.scene.items)
+  const bg = useStore(s => s.scene.backgroundcolor)
   const select = useStore(s => s.setSelectedItemKey)
   const selectedKey = useStore(s => s.selectedItemKey)
   const patchItem = useStore(s => s.patchSceneItem)
@@ -31,7 +32,10 @@ function StoreScene() {
     return array
   }, [items, selectedKey])
 
-  return <>{renderedItems}</>
+  return <>
+    <color attach={'background'} args={[bg]} />
+    {renderedItems}
+  </>
 }
 
 const App = () => {
