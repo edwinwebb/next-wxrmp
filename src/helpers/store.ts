@@ -36,7 +36,7 @@ export interface Scene {
 const WXRMP_LETTERS: Scene = {
   name: 'Scene',
   description: 'The default WXRMP scene',
-  backgroundcolor: '#111111',
+  backgroundcolor: '#33061F',
   updated: '0',
   created: '0',
   items: {
