@@ -1,5 +1,6 @@
 import useStore from "@/helpers/store"
 import GlobalProperies from './Globals'
+import ItemProperties from './ItemProperties'
 
 interface Vector3FormProps {
   onChange: (triplet: [number, number, number]) => void
@@ -64,7 +65,10 @@ const PropertyInput = (props: PropertyInputProps) => {
   />)
 }
 
-// TODO - vlaue to store not on change but on enter
+
+
+
+// TODO - value to store not on change but on enter
 const Properties = () => {
   const selectedKey = useStore(state => state.selectedItemKey)
   const items = useStore(state => state.scene.items)
@@ -72,36 +76,16 @@ const Properties = () => {
   const selectedItem = items[selectedKey]
 
   // todo - replace with a switch once we have more props
-  if (!selectedItem) return (<div className="bg-blackpink-900 text-white h-36 md:h-64 lg:h-96">
-    <GlobalProperies />
-  </div>)
+  if (!selectedItem) {
+    return (<div className="bg-blackpink-900 text-white h-36 md:h-64 lg:h-96">
+      <GlobalProperies />
+    </div>)
+  } else {
+    return (<div className="bg-blackpink-900 text-white h-36 md:h-64 lg:h-96">
+      <ItemProperties />
+    </div>)
+  }
 
-  return (<div className="bg-blackpink-900 text-white h-36 md:h-52 lg:h-96">
-    <ProperyRow label={"Name"}>
-      <PropertyInput
-        onChange={(v) => patchItem(selectedKey, { ...selectedItem, label: v })}
-        value={selectedItem.label}
-      />
-    </ProperyRow>
-    <ProperyRow label={"URL"}>
-      <PropertyInput
-        onChange={(v) => patchItem(selectedKey, { ...selectedItem, url: v })}
-        value={selectedItem.url}
-      />
-    </ProperyRow>
-    <ProperyRow label={"Position"}>
-      <Vector3Form vector={selectedItem.position} onChange={(v) => { console.log(v); patchItem(selectedKey, { ...selectedItem, position: v }) }} />
-    </ProperyRow>
-    <ProperyRow label={"Rotation"}>
-      <Vector3Form vector={selectedItem.rotation} onChange={(v) => patchItem(selectedKey, { ...selectedItem, rotation: v })} />
-    </ProperyRow>
-    <ProperyRow label={"Scale"}>
-      <PropertyInput
-        onChange={(v) => patchItem(selectedKey, { ...selectedItem, scale: checkNumber(v) })}
-        value={selectedItem.scale.toString()}
-      />
-    </ProperyRow>
-  </div>)
 }
 
 export default Properties
