@@ -19,11 +19,11 @@ const VREditor = dynamic(() => import('@/components/canvas/Editor'), {
 
 const Page = () => {
   const router = useRouter()
-  const { sid } = router.query
   const [isLoading, setLoading] = useState<boolean>(true)
   const [hasError, setError] = useState<boolean>(false)
   const scene = useStore(state => state.scene)
   const [replaceScene, addSceneItem] = useStore(state => [state.replaceScene, state.addSceneItem])
+  const { sid } = router.query
   const getScene = async (id: string) => {
     const docRef = doc(firestore, "scenes", id)
     const docSnap = await getDoc(docRef)

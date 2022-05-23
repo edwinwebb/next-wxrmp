@@ -1,6 +1,3 @@
-import { useRouter } from 'next/router'
-import useStore from '@/helpers/store'
-import { useEffect } from 'react'
 import Header from '@/config'
 import Dom from '@/components/layout/dom'
 import partition from '@/helpers/partition'
@@ -22,11 +19,6 @@ const Balance = ({ child }) => {
 
   return (
     <>
-      {/* <Menu /> */}
-      {/*<div>
-        <Dom>{dom}</Dom>
-        {r3f.length > 0 && <LCanvas>{r3f}</LCanvas>}
-      </div> */}
       <div className='flex flex-col flex-wrap h-screen md:flex-row'>
         <div className='h-11 w-screen'><Menu /></div>
         <div className={`h-96 overflow-scroll md:h-full ${hasCanvas ? 'md:w-80' : 'md:w-full'}`}><Dom>{dom}</Dom></div>
@@ -37,12 +29,6 @@ const Balance = ({ child }) => {
 }
 
 function App({ Component, pageProps = { title: 'index' } }) {
-  const router = useRouter()
-
-  useEffect(() => {
-    useStore.setState({ router })
-  }, [router])
-
   const child = Component(pageProps).props.children
 
   return (
