@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import useStore from "@/helpers/store";
 
 const schema = yup.object({
-  label: yup.string().required().max(64),
+  label: yup.string().required().max(64).min(3),
   url: yup.string(),
   px: yup.number(),
   py: yup.number(),
@@ -37,14 +37,14 @@ interface PropertyRowProps {
 
 const ProperyRow = (props: PropertyRowProps) => {
   const { label, children, hasError, errorMessage } = props
-  return (<div className="flex flex-row text-xs py-1 md:py-2 px-2">
-    <div className="w-20 p-1">
+  return (<div className="flex flex-row text-xs py-1 pr-2 md:py-2 flex-wrap">
+    <div className="w-20 px-2 py-1">
       <span>{label}</span>
     </div>
-    <div className="w-34">
+    <div className="flex-1">
       {children}
     </div>
-    {hasError && <div className="w-80">{errorMessage}</div>}
+    {hasError && <div className="w-full">{errorMessage}</div>}
   </div>)
 }
 
@@ -87,21 +87,21 @@ const ItemProperties = () => {
     <form
       onSubmit={onSubmit}
       onBlur={onSubmit}>
-      <ProperyRow label="label" hasError={typeof errors.label !== 'undefined'} errorMessage={errors.label?.message}>
+      <ProperyRow label="Label" hasError={typeof errors.label !== 'undefined'} errorMessage={errors.label?.message}>
         <input
           {...register("label")}
           defaultValue={label}
           className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
+            text-xs text-white w-full p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
           focus:border-gray-900 focus:bg-slate-800 
            ${errors.label && 'focus:bg-red-900'}`} />
       </ProperyRow>
-      <ProperyRow label="url" hasError={typeof errors.url !== 'undefined'} errorMessage={errors.url?.message}>
+      <ProperyRow label="URL" hasError={typeof errors.url !== 'undefined'} errorMessage={errors.url?.message}>
         <input
           {...register("url")}
           defaultValue={url}
           className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
+            text-xs text-white w-full p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
           focus:border-gray-900 focus:bg-slate-800 
            ${errors.url && 'focus:bg-red-900'}`} />
       </ProperyRow>
@@ -117,27 +117,32 @@ const ItemProperties = () => {
           errors.py?.message ||
           errors.pz?.message
         }>
-        <input
-          {...register("px")}
-          defaultValue={0}
-          className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
-           ${errors.px && 'focus:bg-red-900'}`} />
-        <input
-          {...register("py")}
-          defaultValue={0}
-          className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
-           ${errors.py && 'focus:bg-red-900'}`} />
-        <input
-          {...register("pz")}
-          defaultValue={0}
-          className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
-           ${errors.pz && 'focus:bg-red-900'}`} />
+        <div className="grid grid-cols-3">
+          <input
+            {...register("px")}
+            defaultValue={0}
+            className={`
+              text-xs text-white p-0 px-1 py-1 mr-2 
+              rounded-sm bg-slate-700 border-transparent
+            focus:border-gray-900 focus:bg-slate-800 
+            ${errors.px && 'focus:bg-red-900'}`} />
+          <input
+            {...register("py")}
+            defaultValue={0}
+            className={`
+              text-xs text-white p-0 px-1 py-1 mr-2 
+              rounded-sm bg-slate-700 border-transparent
+            focus:border-gray-900 focus:bg-slate-800 
+            ${errors.py && 'focus:bg-red-900'}`} />
+          <input
+            {...register("pz")}
+            defaultValue={0}
+            className={`
+              text-xs text-white p-0 px-1 py-1 mr-2 
+              rounded-sm bg-slate-700 border-transparent
+            focus:border-gray-900 focus:bg-slate-800 
+            ${errors.pz && 'focus:bg-red-900'}`} />
+        </div>
       </ProperyRow>
       <ProperyRow
         label="Rotation"
@@ -151,35 +156,41 @@ const ItemProperties = () => {
           errors.ry?.message ||
           errors.rz?.message
         }>
-        <input
-          {...register("rx")}
-          defaultValue={0}
-          className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
-           ${errors.rx && 'focus:bg-red-900'}`} />
-        <input
-          {...register("ry")}
-          defaultValue={0}
-          className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
-           ${errors.ry && 'focus:bg-red-900'}`} />
-        <input
-          {...register("rz")}
-          defaultValue={0}
-          className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
-           ${errors.rz && 'focus:bg-red-900'}`} />
+        <div className="grid grid-cols-3">
+          <input
+            {...register("rx")}
+            defaultValue={0}
+            className={`
+              text-xs text-white p-0 px-1 py-1 mr-2 
+              rounded-sm bg-slate-700 border-transparent
+            focus:border-gray-900 focus:bg-slate-800 
+            ${errors.rx && 'focus:bg-red-900'}`} />
+          <input
+            {...register("ry")}
+            defaultValue={0}
+            className={`
+              text-xs text-white p-0 px-1 py-1 mr-2 
+              rounded-sm bg-slate-700 border-transparent
+            focus:border-gray-900 focus:bg-slate-800 
+            ${errors.ry && 'focus:bg-red-900'}`} />
+          <input
+            {...register("rz")}
+            defaultValue={0}
+            className={`
+              text-xs text-white p-0 px-1 py-1 mr-2 
+              rounded-sm bg-slate-700 border-transparent
+            focus:border-gray-900 focus:bg-slate-800 
+            ${errors.rz && 'focus:bg-red-900'}`} />
+        </div>
       </ProperyRow>
       <ProperyRow label="Scale" hasError={typeof errors.scale !== 'undefined'} errorMessage={errors.scale?.message}>
         <input
           {...register("scale")}
           defaultValue={scale}
           className={`
-            text-xs text-white w-56 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
+            text-xs text-white p-0 px-1 py-1 mr-2 
+              rounded-sm bg-slate-700 border-transparent
+            focus:border-gray-900 focus:bg-slate-800 
            ${errors.scale && 'focus:bg-red-900'}`} />
       </ProperyRow>
     </form>
