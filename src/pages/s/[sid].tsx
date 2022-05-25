@@ -71,14 +71,21 @@ const Page = () => {
 
   return (
     <>
-      <div className='md:flex md:flex-col md:h-full md:border-r-2 md:border-r-blackpink-800'>
-        <SceneControls
-          saveHandler={() => { saveScene() }}
-          forkHandler={() => { forkScene() }}
-          addHandler={() => { addSceneItem('image', 'new item', [0, 0, Math.random()], [0, 0, 0], '404') }}
-        />
-        <SceneGraph />
-        <SceneProperties />
+      <div className='h-full md:flex md:flex-col md:border-r-2 
+       md:border-r-blackpink-800'>
+        <div className='h-18'>
+          <SceneControls
+            saveHandler={() => { saveScene() }}
+            forkHandler={() => { forkScene() }}
+            addHandler={() => { addSceneItem('image', 'new item', [0, 0, Math.random()], [0, 0, 0], '404') }}
+          />
+        </div>
+        <div className='h-40 box-border overflow-scroll'>
+          <SceneGraph />
+        </div>
+        <div className="h-56">
+          <SceneProperties />
+        </div>
       </div>
       {/* @ts-ignore */}
       <VREditor r3f loading={isLoading} error={hasError} />

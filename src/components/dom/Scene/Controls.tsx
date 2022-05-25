@@ -20,7 +20,10 @@ interface SceneControlProps {
 
 const Controls = (props: SceneControlProps) => {
   const { saveHandler, forkHandler, addHandler } = props
-  return (<div className="bg-blackpink-900 text-white h-18 py-2 flex flex-row-reverse border-blackpink-800 border-b-2">
+  return (<div className="
+    box-border py-2 border-b-2 md:w-full
+    flex flex-row-reverse w-screen
+    bg-blackpink-900 text-white  border-blackpink-800">
     <div>
       <ControlButton label="Save" iconCode="save" onClick={() => saveHandler()} />
       <ControlButton label="Fork" iconCode="fork_right" onClick={() => forkHandler()} />
