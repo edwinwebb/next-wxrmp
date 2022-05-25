@@ -65,9 +65,6 @@ const PropertyInput = (props: PropertyInputProps) => {
   />)
 }
 
-
-
-
 // TODO - value to store not on change but on enter
 const Properties = () => {
   const selectedKey = useStore(state => state.selectedItemKey)
@@ -77,15 +74,14 @@ const Properties = () => {
 
   // todo - replace with a switch once we have more props
   if (!selectedItem) {
-    return (<div className="bg-blackpink-900 text-white h-36 md:h-64 lg:h-96">
+    return (
       <GlobalProperies />
-    </div>)
+    )
   } else {
-    return (<div className="bg-blackpink-900 text-white h-36 md:h-64 lg:h-96">
+    return (
       <ItemProperties />
-    </div>)
+    )
   }
-
 }
 
 export default Properties
