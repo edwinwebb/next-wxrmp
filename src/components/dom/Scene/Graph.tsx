@@ -1,8 +1,10 @@
 import useStore from "@/helpers/store"
 import { useMemo } from "react";
+import { PhotographIcon, FilmIcon } from '@heroicons/react/solid'
+
 
 interface GraphItemProps {
-  iconCode: string;
+  type: string;
   selected: boolean;
   name: string;
   deleteCallback: () => void;
@@ -12,13 +14,16 @@ interface GraphItemProps {
 
 // todo : keyodwn delete 
 const GraphItem = (props: GraphItemProps) => {
-  const { iconCode, selected, name, deleteCallback, resetCallback, selectedCallback } = props;
+  const { type, selected, name, deleteCallback, resetCallback, selectedCallback } = props;
   return (
     <li
       className={`${selected && 'bg-slate-800'} flex justify-between rounded-sm px-2 md:py-1 md:my-1 cursor-pointer`}
       onClick={(e) => { e.stopPropagation(); selectedCallback() }}>
       <div className="">
-        <span className="font-icon mr-2">{iconCode}</span>
+        <span className="mr-2">
+          {type === 'image' && <PhotographIcon className="inline w-4 h-4" />}
+          {type === 'video' && <FilmIcon className="inline w-4 h-4" />}
+        </span>
         <span className="text-sm">{name}</span>
       </div>
       <div className={` ${selected ? 'visible' : 'invisible'} `}>
@@ -42,7 +47,7 @@ const Graph = () => {
       const { type, label } = items[itemKey]
       array.push(<GraphItem
         key={'sg_' + itemKey}
-        iconCode={type === "image" ? "image" : "movie"}
+        type={type}
         selected={itemKey === selectedKey}
         name={label}
         deleteCallback={() => { remove(itemKey) }}

@@ -1,5 +1,5 @@
 import useStore from '@/helpers/store'
-import { UploadIcon, SparklesIcon, PlusSmIcon, PhotographIcon, VideoCameraIcon } from '@heroicons/react/solid'
+import { UploadIcon, SparklesIcon, PlusSmIcon, PhotographIcon, FilmIcon } from '@heroicons/react/solid'
 
 interface ControlButtonProps {
   children: React.ReactNode
@@ -37,7 +37,7 @@ const Controls = (props: SceneControlProps) => {
       </ControlButton>
       <ControlButton onClick={() => addSceneItem('video', 'video 1', [0, 0, Math.random()], [0, 0, 0], '404')} >
         <PlusSmIcon className='h-3 w-3 inline mr-1' />
-        <VideoCameraIcon className='h-3 w-3 inline mr-1' />
+        <FilmIcon className='h-3 w-3 inline mr-1' />
       </ControlButton>
     </div>
   </div>)
