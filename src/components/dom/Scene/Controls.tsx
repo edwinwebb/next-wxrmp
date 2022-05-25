@@ -1,5 +1,5 @@
 import useStore from '@/helpers/store'
-import { UploadIcon, SparklesIcon, PlusSmIcon, PhotographIcon, FilmIcon } from '@heroicons/react/solid'
+import { UploadIcon, DuplicateIcon, PlusSmIcon, PhotographIcon, FilmIcon } from '@heroicons/react/solid'
 
 interface ControlButtonProps {
   children: React.ReactNode
@@ -28,7 +28,7 @@ const Controls = (props: SceneControlProps) => {
         <span className="text-xs">Save</span>
       </ControlButton>
       <ControlButton onClick={() => forkHandler()} >
-        <SparklesIcon className='h-3 w-3 inline mr-1' />
+        <DuplicateIcon className='h-3 w-3 inline mr-1' />
         <span className="text-xs">Fork</span>
       </ControlButton>
       <ControlButton onClick={() => addSceneItem('image', 'image 1', [0, 0, Math.random()], [0, 0, 0], '404')} >

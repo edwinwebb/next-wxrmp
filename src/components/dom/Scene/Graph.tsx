@@ -1,6 +1,6 @@
 import useStore from "@/helpers/store"
 import { useMemo } from "react";
-import { PhotographIcon, FilmIcon } from '@heroicons/react/solid'
+import { PhotographIcon, FilmIcon, TrashIcon, RefreshIcon } from '@heroicons/react/solid'
 
 
 interface GraphItemProps {
@@ -27,8 +27,12 @@ const GraphItem = (props: GraphItemProps) => {
         <span className="text-sm">{name}</span>
       </div>
       <div className={` ${selected ? 'visible' : 'invisible'} `}>
-        <button className="font-icon mr-2 hover:text-blackpink-300" onClick={(e) => { e.stopPropagation(); resetCallback() }}>restart_alt</button>
-        <button className="font-icon hover:text-blackpink-300" onClick={(e) => { e.stopPropagation(); deleteCallback() }}>delete</button>
+        <button className="mr-2 hover:text-blackpink-300" onClick={(e) => { e.stopPropagation(); resetCallback() }}>
+          <RefreshIcon className="inline w-4 h-4" />
+        </button>
+        <button className="hover:text-blackpink-300" onClick={(e) => { e.stopPropagation(); deleteCallback() }}>
+          <TrashIcon className="inline w-4 h-4" />
+        </button>
       </div>
     </li>
   )
