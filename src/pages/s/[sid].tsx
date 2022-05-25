@@ -22,7 +22,7 @@ const Page = () => {
   const [isLoading, setLoading] = useState<boolean>(true)
   const [hasError, setError] = useState<boolean>(false)
   const scene = useStore(state => state.scene)
-  const [replaceScene, addSceneItem] = useStore(state => [state.replaceScene, state.addSceneItem])
+  const replaceScene = useStore(state => state.replaceScene)
   const { sid } = router.query
   const getScene = async (id: string) => {
     const docRef = doc(firestore, "scenes", id)
@@ -77,10 +77,9 @@ const Page = () => {
           <SceneControls
             saveHandler={() => { saveScene() }}
             forkHandler={() => { forkScene() }}
-            addHandler={() => { addSceneItem('image', 'new item', [0, 0, Math.random()], [0, 0, 0], '404') }}
           />
         </div>
-        <div className='h-40 box-border overflow-scroll'>
+        <div className='h-40 md:flex-grow box-border overflow-scroll'>
           <SceneGraph />
         </div>
         <div className="h-56">

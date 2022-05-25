@@ -1,33 +1,44 @@
+import useStore from '@/helpers/store'
+import { UploadIcon, SparklesIcon, PlusSmIcon, PhotographIcon, VideoCameraIcon } from '@heroicons/react/solid'
+
 interface ControlButtonProps {
-  label: string;
-  iconCode: string;
+  children: React.ReactNode
   onClick: () => void
 }
 
 const ControlButton = (props: ControlButtonProps) => {
-  const { label, iconCode, onClick } = props
+  const { children, onClick } = props
   return (<button className="text-sm rounded border-blackpink-800 mr-2 px-2 border-2 box-border hover:border-blackpink-300 hover:bg-blackpink-500 " onClick={() => { onClick() }}>
-    <span className="font-icon mr-1">{iconCode}</span>
-    <span className="text-xs">{label}</span>
+    {children}
   </button>)
 }
 
 interface SceneControlProps {
   saveHandler: () => void;
   forkHandler: () => void;
-  addHandler: () => void;
 }
 
 const Controls = (props: SceneControlProps) => {
-  const { saveHandler, forkHandler, addHandler } = props
-  return (<div className="
-    box-border py-2 border-b-2 md:w-full
-    flex flex-row-reverse w-screen
-    bg-blackpink-900 text-white  border-blackpink-800">
+  const { saveHandler, forkHandler } = props
+  const addSceneItem = useStore(state => state.addSceneItem)
+  return (<div className="bg-blackpink-900 text-white h-18 py-2 flex flex-row-reverse border-blackpink-800 border-b-2">
     <div>
-      <ControlButton label="Save" iconCode="save" onClick={() => saveHandler()} />
-      <ControlButton label="Fork" iconCode="fork_right" onClick={() => forkHandler()} />
-      <ControlButton label="Add" iconCode="add" onClick={() => addHandler()} />
+      <ControlButton onClick={() => saveHandler()}>
+        <UploadIcon className='h-3 w-3 inline mr-1' />
+        <span className="text-xs">Save</span>
+      </ControlButton>
+      <ControlButton onClick={() => forkHandler()} >
+        <SparklesIcon className='h-3 w-3 inline mr-1' />
+        <span className="text-xs">Fork</span>
+      </ControlButton>
+      <ControlButton onClick={() => addSceneItem('image', 'image 1', [0, 0, Math.random()], [0, 0, 0], '404')} >
+        <PlusSmIcon className='h-3 w-3 inline mr-1' />
+        <PhotographIcon className='h-3 w-3 inline mr-1' />
+      </ControlButton>
+      <ControlButton onClick={() => addSceneItem('video', 'video 1', [0, 0, Math.random()], [0, 0, 0], '404')} >
+        <PlusSmIcon className='h-3 w-3 inline mr-1' />
+        <VideoCameraIcon className='h-3 w-3 inline mr-1' />
+      </ControlButton>
     </div>
   </div>)
 }
