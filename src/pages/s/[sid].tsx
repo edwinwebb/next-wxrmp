@@ -82,7 +82,7 @@ const Page = () => {
         <div className='h-40 md:flex-grow box-border overflow-scroll'>
           <SceneGraph />
         </div>
-        <div className="h-56">
+        <div className="h-64">
           <SceneProperties />
         </div>
       </div>
