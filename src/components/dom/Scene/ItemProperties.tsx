@@ -192,6 +192,7 @@ const ItemProperties = () => {
             focus:border-gray-900 focus:bg-slate-800 
            ${errors.scale && 'focus:bg-red-900'}`} />
       </ProperyRow>
+      <input type="submit" className="w-1 h-1" tabIndex={-1} />
     </form>
   )
 }
