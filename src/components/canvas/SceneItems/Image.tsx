@@ -75,7 +75,7 @@ export function ImageSceneItem({ position, rotation, scale, name, url, selected,
         </ErrorBoundary>
         <group visible={isHover} position={[0, 0, 0.0051]}>
           <Move targetRef={groupRef} onMoved={(p, r) => { onMove(p, r) }} />
-          <Resize targetRef={groupRef} position={[0.4, childAspect / 2 - 0.1, 0]} onResize={s => onScale(s)} />
+          <Resize targetRef={groupRef} aspect={childAspect} position={[0.4, childAspect / 2 - 0.1, 0]} onResize={s => onScale(s)} />
           <Button
             iconkey="delete"
             position={[0, childAspect / -2 + 0.03, 0]}

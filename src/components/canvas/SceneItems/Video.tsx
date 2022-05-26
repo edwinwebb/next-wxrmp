@@ -119,7 +119,7 @@ export function VideoSceneItem({ position, rotation, scale, url, name, selected,
         </ErrorBoundary>
         <group visible={isHover} position={[0, 0, 0.0051]}>
           <Move targetRef={groupRef} onMoved={(p, r) => { onMove(p, r) }} />
-          <Resize targetRef={groupRef} onResize={s => onScale(s)} position={[0.4, childAspect / 2 - 0.1, 0]} />
+          <Resize targetRef={groupRef} aspect={childAspect} onResize={s => onScale(s)} position={[0.4, childAspect / 2 - 0.1, 0]} />
           <ButtonRow y={childAspect / -2 + 0.03} childSpacing={0.2}>
             <Button iconkey={playing ? "pause" : "pplay"} onClick={() => { setPlaying(!playing) }} />
             <Button iconkey={muted ? "mute" : "unmute"} onClick={() => { setMuted(!muted) }} />
