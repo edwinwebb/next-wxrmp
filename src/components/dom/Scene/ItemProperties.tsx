@@ -60,7 +60,6 @@ const ItemProperties = () => {
   });
   const onSubmit = handleSubmit(data => {
     if (isValid && isDirty) {
-      console.log('to store', data)
       patchItem(selectedKey,
         {
           ...selectedItem,
@@ -81,7 +80,7 @@ const ItemProperties = () => {
     setValue('ry', rotation[1])
     setValue('rz', rotation[2])
     setValue('scale', scale)
-  }, [label, url, position, rotation])
+  }, [label, url, position, rotation, scale])
 
   return (
     <form
