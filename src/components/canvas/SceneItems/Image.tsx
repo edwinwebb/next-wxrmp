@@ -1,4 +1,4 @@
-import { useTexture, Plane, Edges } from '@react-three/drei'
+import { useTexture, Edges } from '@react-three/drei'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { DoubleSide, Group } from 'three'
 import { Icon } from '@/components/canvas/UI/Icon'

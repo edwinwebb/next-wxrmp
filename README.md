@@ -68,8 +68,8 @@ adb shell ip route
 ### steps for wired dev
 
 cd android-sdk
-adb devices
-adb reverse tcp:3000 tcp:3000
+./adb devices
+./adb reverse tcp:3000 tcp:3000
 
 chrome://inspect/#devices
 
