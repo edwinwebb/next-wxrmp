@@ -3,6 +3,7 @@ import useStore from "@/helpers/store"
 import { useMemo } from "react"
 import { ImageSceneItem } from '@/components/canvas/SceneItems/Image'
 import { VideoSceneItem } from '@/components/canvas/SceneItems/Video'
+import Shelf from '@/components/canvas/UI/Shelf'
 
 function StoreScene() {
   const items = useStore((s) => s.scene.items)
@@ -62,6 +63,7 @@ const App = () => {
   return (<>
     <PlayerControls />
     <StoreScene />
+    <Shelf />
   </>)
 }
 
