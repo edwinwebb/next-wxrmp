@@ -159,7 +159,7 @@ export function Resize(props: ScaleButtonProps) {
     // This works for mouse
     if (mouseDistance || activeController) {
       let dist = dummyvec.distanceTo(targetRef.current.position)
-      let scaleMod = MathUtils.clamp((dist * 2) / aspect, SCALE_MIN, SCALE_MAX)
+      let scaleMod = MathUtils.clamp(dist * 1.5, SCALE_MIN, SCALE_MAX)
       targetRef.current.scale.x = scaleMod
       targetRef.current.scale.y = scaleMod
     }

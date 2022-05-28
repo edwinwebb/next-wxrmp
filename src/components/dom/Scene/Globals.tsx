@@ -38,8 +38,6 @@ const Globals = () => {
     setValue('background', background)
   }, [name, description, background])
 
-  console.log(errors)
-
   return (<div>
     <h3 className="text-sm px-2 font-bold pt-2">Globals</h3>
     <div>
