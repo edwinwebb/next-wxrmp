@@ -29,6 +29,7 @@ function StoreScene() {
             onScale={(scale) => { patchItem(itemKey, { ...items[itemKey], scale }) }}
             onDelete={key => { deleteItem(key) }}
             onSelect={() => { select(itemKey) }}
+            onPaste={(url) => { patchItem(itemKey, { ...items[itemKey], url: url ? url : items[itemKey].url }) }}
           />)
       } else {
         array.push(
@@ -44,6 +45,7 @@ function StoreScene() {
             onScale={(scale) => { patchItem(itemKey, { ...items[itemKey], scale }) }}
             onDelete={key => { deleteItem(key) }}
             onSelect={() => { select(itemKey) }}
+            onPaste={(url) => { patchItem(itemKey, { ...items[itemKey], url: url ? url : items[itemKey].url }) }}
           />)
       }
     }

@@ -5,7 +5,8 @@ import { Icon } from '@/components/canvas/UI/Icon'
 import { ErrorBoundary } from '@/helpers/ErrorBoundary'
 import { Move, Resize } from '@/components/canvas/SceneItems/LinkedButtons'
 import { Interactive } from '@react-three/xr'
-import { Button } from '@/components/canvas/UI/Buttons'
+import { Button, ButtonRow } from '@/components/canvas/UI/Buttons'
+import { useCopyToClipboard, usePasteFromClipboard } from '@/helpers/useClipboard'
 
 interface ImagePlaneProps {
   url: string;
@@ -44,12 +45,16 @@ interface ImageSceneItemProps {
   onScale: (scale: number) => void
   onDelete: (key: string) => void
   onSelect: (key: string) => void
+  onPaste: (text: string | null) => void
+
 }
 
-export function ImageSceneItem({ position, rotation, scale, name, url, selected, onMove, onScale, onDelete, onSelect }: ImageSceneItemProps) {
+export function ImageSceneItem({ position, rotation, scale, name, url, selected, onMove, onScale, onDelete, onSelect, onPaste }: ImageSceneItemProps) {
   const groupRef = useRef<Group>(null!)
   const [childAspect, setChildAspect] = useState(1)
   const [isHover, setHover] = useState(false)
+  const [pastedText, paste] = usePasteFromClipboard()
+  const [, copy] = useCopyToClipboard()
 
   return (
     <group
@@ -76,16 +81,21 @@ export function ImageSceneItem({ position, rotation, scale, name, url, selected,
         <group visible={isHover} position={[0, 0, 0.0051]}>
           <Move targetRef={groupRef} onMoved={(p, r) => { onMove(p, r) }} />
           <Resize targetRef={groupRef} aspect={childAspect} position={[0.4, childAspect / 2 - 0.1, 0]} onResize={s => onScale(s)} />
-          <Button
-            iconkey="delete"
-            position={[0, childAspect / -2 + 0.03, 0]}
-            onSelect={() => {
-              onDelete(name)
-            }}
-            onClick={() => {
-              onDelete(name)
-            }}
-          />
+          <ButtonRow y={childAspect / -2 + 0.03} childSpacing={0.2}>
+            <Button
+              iconkey="delete"
+              position={[0, childAspect / -2 + 0.03, 0]}
+              onSelect={() => {
+                onDelete(name)
+              }}
+              onClick={() => {
+                onDelete(name)
+              }}
+            />
+            <Button iconkey='copy' onSelect={() => { copy(url) }} onClick={() => { copy(url) }} />
+            <Button iconkey='paste' onClick={async () => { await paste(); onPaste(pastedText) }} onSelect={async () => { await paste(); onPaste(pastedText) }} />
+          </ButtonRow>
+
         </group>
       </Interactive>
     </group>

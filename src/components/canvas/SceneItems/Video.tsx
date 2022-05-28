@@ -7,6 +7,7 @@ import { Button, ButtonRow } from '@/components/canvas/UI/Buttons'
 import { useState, useEffect, useRef, useCallback, Suspense } from 'react'
 import { DoubleSide, Mesh, sRGBEncoding, Group } from 'three'
 import { generateUUID } from 'three/src/math/MathUtils'
+import { useCopyToClipboard, usePasteFromClipboard } from '@/helpers/useClipboard'
 
 interface VideoPlaneProps {
   url: string
@@ -83,14 +84,17 @@ interface VideoSceneItemProps {
   onScale: (scale: number) => void
   onDelete: (key: string) => void
   onSelect: (key: string) => void
+  onPaste: (text: string | null) => void
 }
 
-export function VideoSceneItem({ position, rotation, scale, url, name, selected, onMove, onScale, onDelete, onSelect }: VideoSceneItemProps) {
+export function VideoSceneItem({ position, rotation, scale, url, name, selected, onMove, onScale, onDelete, onSelect, onPaste }: VideoSceneItemProps) {
   const groupRef = useRef<Group>(null!)
   const [childAspect, setChildAspect] = useState(1)
   const [isHover, setHover] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [muted, setMuted] = useState(false)
+  const [pastedText, paste] = usePasteFromClipboard()
+  const [, copy] = useCopyToClipboard()
 
   return (
     <group
@@ -121,7 +125,7 @@ export function VideoSceneItem({ position, rotation, scale, url, name, selected,
           <Move targetRef={groupRef} onMoved={(p, r) => { onMove(p, r) }} />
           <Resize targetRef={groupRef} aspect={childAspect} onResize={s => onScale(s)} position={[0.4, childAspect / 2 - 0.1, 0]} />
           <ButtonRow y={childAspect / -2 + 0.03} childSpacing={0.2}>
-            <Button iconkey={playing ? "pause" : "pplay"} onClick={() => { setPlaying(!playing) }} />
+            <Button iconkey={playing ? "pause" : "play"} onClick={() => { setPlaying(!playing) }} />
             <Button iconkey={muted ? "mute" : "unmute"} onClick={() => { setMuted(!muted) }} />
             <Button
               iconkey="delete"
@@ -133,6 +137,8 @@ export function VideoSceneItem({ position, rotation, scale, url, name, selected,
                 onDelete(name)
               }}
             />
+            <Button iconkey='copy' onClick={() => { copy(url) }} />
+            <Button iconkey='paste' onClick={async () => { await paste(); onPaste(pastedText) }} />
           </ButtonRow>
         </group>
       </Interactive>
