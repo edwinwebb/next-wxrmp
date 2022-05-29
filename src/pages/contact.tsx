@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useState } from "react";
 
 const schema = yup.object({
-  name: yup.string().max(64),
+  name: yup.string().max(64).required(),
   email: yup.string().email().required().max(255),
-  message: yup.string().min(128)
+  message: yup.string().min(128).required()
 }).required();
 
 type ContactFields = {
@@ -38,6 +39,7 @@ const Page = () => {
   const { register, handleSubmit, formState: { isValid, isDirty, errors }, setValue } = useForm<ContactFields>({
     resolver: yupResolver(schema)
   });
+  const [hasSubmitted, setSubmitted] = useState(false);
   const onSubmit = handleSubmit(data => {
     if (isValid && isDirty) {
       console.log('submit', data)
@@ -47,9 +49,8 @@ const Page = () => {
     <>
       <div className="container mx-auto px-4">
         <h2 className="text-xl font-bold pt-4 pb-2">Contact Us</h2>
-        <p>This is your chance to tell us what you think</p>
         <div className="pt-4 md:w-1/2 md:mx-auto md:p-4">
-          <form>
+          <form onSubmit={onSubmit}>
             <ProperyRow label="Name" hasError={typeof errors.name !== 'undefined'} errorMessage={errors.name?.message}>
               <input
                 {...register("name")}
@@ -77,6 +78,9 @@ const Page = () => {
                   ${errors.message && 'focus:bg-red-900'}`}
               />
             </ProperyRow>
+            <div className="flex flex-row-reverse px-4 pt-4">
+              <input type="submit" className="bg-pink-600 text-white rounded px-2 py-1" />
+            </div>
           </form>
         </div>
 

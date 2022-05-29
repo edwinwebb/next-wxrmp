@@ -38,7 +38,7 @@ export interface Scene {
 const WXRMP_LETTERS: Scene = {
   name: 'Scene',
   description: 'The default WXRMP scene',
-  backgroundcolor: '#33061F',
+  backgroundcolor: '#888888',
   updated: '0',
   created: '0',
   items: {
@@ -128,6 +128,7 @@ const useStore = create<SceneStore>(devtools((set) => ({
   addSceneItem: (type, label, position, rotation, url) =>
     set(
       produce((draft: SceneStore) => {
+        const newItemID = MathUtils.generateUUID()
         const newItem: SceneItem = {
           label,
           position,
@@ -136,7 +137,8 @@ const useStore = create<SceneStore>(devtools((set) => ({
           type,
           url
         }
-        draft.scene.items[MathUtils.generateUUID()] = newItem
+        draft.scene.items[newItemID] = newItem
+        draft.selectedItemKey = newItemID
       }),
     ),
   patchSceneItem: (sceneid, payload) =>

@@ -23,10 +23,14 @@ function VideoPlane(props: VideoPlaneProps) {
   const [video] = useState(() => {
     const vid = document.createElement('video')
     vid.crossOrigin = 'anonymous'
-    vid.src = url
+    vid.src = url + '#t=0.01'
     vid.muted = muted
     vid.loop = true
     vid.id = generateUUID()
+    vid.disablePictureInPicture = true
+    vid.disableRemotePlayback = true
+    vid.preload = 'auto'
+    vid.controls = false
     return vid
   })
 
@@ -59,7 +63,7 @@ function VideoPlane(props: VideoPlaneProps) {
   }, [play, video])
 
   useEffect(() => {
-    video.src = url
+    video.src = url + '#t=0.01'
   }, [url, video])
 
   return (

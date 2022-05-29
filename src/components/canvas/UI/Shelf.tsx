@@ -63,14 +63,14 @@ export default function Shelf() {
       <ShelfItem
         icon="image"
         onInteract={() => {
-          addSceneItem('image', 'image 1', [0, 1, -1 + Math.random()], [0, 0, 0], '404')
+          addSceneItem('image', 'image 1', [0, 1, -1 - Math.random()], [0, 0, 0], '404')
         }}
         x={-0.4}
       />
       <ShelfItem
         icon="video"
         onInteract={() => {
-          addSceneItem('video', 'video 1', [0, 1, -1 + Math.random()], [0, 0, 0], '404')
+          addSceneItem('video', 'video 1', [0, 1, -1 - Math.random()], [0, 0, 0], '404')
         }}
         x={-0.2}
       />

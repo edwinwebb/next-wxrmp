@@ -31,11 +31,11 @@ const Controls = (props: SceneControlProps) => {
         <DuplicateIcon className='h-3 w-3 inline mr-1' />
         <span className="text-xs">Fork</span>
       </ControlButton>
-      <ControlButton onClick={() => addSceneItem('image', 'image 1', [0, 1, -1 + Math.random()], [0, 0, 0], '404')} >
+      <ControlButton onClick={() => addSceneItem('image', 'image 1', [0, 1, -1 - Math.random()], [0, 0, 0], '404')} >
         <PlusSmIcon className='h-3 w-3 inline mr-1' />
         <PhotographIcon className='h-3 w-3 inline mr-1' />
       </ControlButton>
-      <ControlButton onClick={() => addSceneItem('video', 'video 1', [0, 1, -1 + Math.random()], [0, 0, 0], '404')} >
+      <ControlButton onClick={() => addSceneItem('video', 'video 1', [0, 1, -1 - Math.random()], [0, 0, 0], '404')} >
         <PlusSmIcon className='h-3 w-3 inline mr-1' />
         <FilmIcon className='h-3 w-3 inline mr-1' />
       </ControlButton>
