@@ -91,8 +91,8 @@ const ItemProperties = () => {
           {...register("label")}
           defaultValue={label}
           className={`
-            text-xs text-white w-full p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
+            w-full p-0 px-1 py-1 mr-2 rounded-sm 
+            text-xs text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
            ${errors.label && 'focus:bg-red-900'}`} />
       </ProperyRow>
       <ProperyRow label="URL" hasError={typeof errors.url !== 'undefined'} errorMessage={errors.url?.message}>
@@ -100,8 +100,8 @@ const ItemProperties = () => {
           {...register("url")}
           defaultValue={url}
           className={`
-            text-xs text-white w-full p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent
-          focus:border-gray-900 focus:bg-slate-800 
+            w-full p-0 px-1 py-1 mr-2 rounded-sm 
+            text-xs text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
            ${errors.url && 'focus:bg-red-900'}`} />
       </ProperyRow>
       <ProperyRow
@@ -121,24 +121,24 @@ const ItemProperties = () => {
             {...register("px")}
             defaultValue={0}
             className={`
-              text-xs text-white p-0 px-1 py-1 mr-2 
-              rounded-sm bg-slate-700 border-transparent
+              p-0 px-1 py-1 mr-2 
+              text-xs text-white rounded-sm bg-slate-700 border-transparent
             focus:border-gray-900 focus:bg-slate-800 
             ${errors.px && 'focus:bg-red-900'}`} />
           <input
             {...register("py")}
             defaultValue={0}
             className={`
-              text-xs text-white p-0 px-1 py-1 mr-2 
-              rounded-sm bg-slate-700 border-transparent
+              p-0 px-1 py-1 mr-2 
+              text-xs text-white rounded-sm bg-slate-700 border-transparent
             focus:border-gray-900 focus:bg-slate-800 
             ${errors.py && 'focus:bg-red-900'}`} />
           <input
             {...register("pz")}
             defaultValue={0}
             className={`
-              text-xs text-white p-0 px-1 py-1 mr-2 
-              rounded-sm bg-slate-700 border-transparent
+              p-0 px-1 py-1 mr-2 
+              text-xs text-white rounded-sm bg-slate-700 border-transparent
             focus:border-gray-900 focus:bg-slate-800 
             ${errors.pz && 'focus:bg-red-900'}`} />
         </div>

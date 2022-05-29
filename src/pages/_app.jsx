@@ -22,7 +22,7 @@ const Balance = ({ child }) => {
       <div className='flex flex-col flex-wrap h-screen md:flex-row'>
         <div className='h-11 w-screen'><Menu /></div>
         <div className={`h-96 md:h-full ${hasCanvas ? 'md:w-80' : 'md:w-full'} bg-blackpink-900 text-white`}><Dom>{dom}</Dom></div>
-        {hasCanvas && <div className='flex-1'><LCanvas>{r3f}</LCanvas></div>}
+        {hasCanvas && <div className='flex-1 w-full'><LCanvas>{r3f}</LCanvas></div>}
       </div>
     </>
   )

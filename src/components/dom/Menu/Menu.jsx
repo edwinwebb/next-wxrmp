@@ -15,10 +15,10 @@ export default function Menu() {
       </div>
       <div className="pr-2">
         <Link href="/about">
-          <a className="invisible md:visible px-2 py-1 mr-2 text-white/90 hover:bg-pink-200 rounded">About</a>
+          <a className="hidden md:inline px-2 py-1 mr-2 text-white/90 hover:bg-pink-200 rounded">About</a>
         </Link>
         <Link href="/contact">
-          <a className="invisible md:visible px-2 py-1 mr-2 text-white/90 hover:bg-pink-200 rounded">Contact</a>
+          <a className="hidden md:inline px-2 py-1 mr-2 text-white/90 hover:bg-pink-200 rounded">Contact</a>
         </Link>
         <Link href="/s/new"><button className="bg-pink-600 text-white rounded px-2 py-1">Create</button></Link>
       </div>

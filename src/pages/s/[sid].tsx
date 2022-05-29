@@ -79,7 +79,7 @@ const Page = () => {
             forkHandler={() => { forkScene() }}
           />
         </div>
-        <div className='h-40 md:flex-grow box-border overflow-scroll'>
+        <div className='h-40 md:flex-grow'>
           <SceneGraph />
         </div>
         <div className="h-64">
