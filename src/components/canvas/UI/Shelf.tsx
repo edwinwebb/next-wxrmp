@@ -3,6 +3,7 @@ import { Interactive } from '@react-three/xr'
 import { useState, useEffect } from 'react'
 import { Icon } from './Icon'
 import useStore from "@/helpers/store"
+import { MultiplyOperation } from 'three'
 
 interface ShelfItemProps {
   onInteract: () => void
@@ -12,7 +13,7 @@ interface ShelfItemProps {
 
 function ShelfItem(props: ShelfItemProps) {
   const { onInteract = () => { }, icon = 'copy', x = 0 } = props
-  const color = 0x000000
+  const color = 0xffffff
   const checkColor = 0x00ff00
   const [timeoutIsRunning, setTimeoutIsRunning] = useState(false)
 
@@ -41,7 +42,7 @@ function ShelfItem(props: ShelfItemProps) {
         color={timeoutIsRunning ? checkColor : color} />
       <Interactive onSelect={clickHandler}>
         <Sphere args={[0.05, 32, 32]} onClick={clickHandler}>
-          <meshPhysicalMaterial transparent opacity={0.2} />
+          <meshBasicMaterial transparent opacity={0.2} combine={MultiplyOperation} color={0x222222} />
         </Sphere>
       </Interactive>
     </group>
@@ -53,11 +54,11 @@ export default function Shelf() {
   const playAllState = useStore(state => state.playAllState)
   const addSceneItem = useStore(state => state.addSceneItem)
   const [shelfY, setShelfY] = useState(0.9)
-  const shelfColor = 0x999999
+  const shelfColor = 0x666666
   return (
     <group position={[0, shelfY, -0.5]}>
       <Box args={[1, 0.01, 0.1]} position={[0, 0.04, 0]}>
-        <meshStandardMaterial color={shelfColor} />
+        <meshBasicMaterial color={shelfColor} />
       </Box>
       <ShelfItem
         icon="image"

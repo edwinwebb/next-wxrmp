@@ -121,6 +121,7 @@ const useStore = create<SceneStore>(devtools((set) => ({
   removeSceneItem: (sceneid) =>
     set(
       produce((draft: SceneStore) => {
+        draft.selectedItemKey = ''
         delete draft.scene.items[sceneid]
       }),
     ),

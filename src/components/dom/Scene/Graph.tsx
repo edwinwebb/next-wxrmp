@@ -64,9 +64,9 @@ const Graph = () => {
 
   return (<div
     className="
-    h-full
-    border-b-2 
-    bg-blackpink-900 text-white border-blackpink-800"
+      h-full
+      border-b-2 
+      bg-blackpink-900 text-white border-blackpink-800"
     onClick={(e) => { e.stopPropagation(); setSelected('') }} >
     <ul className="p-2">
       {renderedItems}
