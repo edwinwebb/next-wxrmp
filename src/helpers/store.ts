@@ -7,6 +7,8 @@ interface SceneStore {
   scene: Scene;
   selectedItemKey: string;
   router: String | null;
+  playAllState: boolean;
+  togglePlayAllState: () => void
   setSelectedItemKey: (key: string) => void;
   removeSceneItem: (id: string) => void;
   addSceneItem: (type: "video" | "image", label: string, position: [number, number, number], rotation: [number, number, number], url: string) => void;
@@ -88,6 +90,14 @@ const useStore = create<SceneStore>(devtools((set) => ({
   router: null,
   scene: WXRMP_LETTERS,
   selectedItemKey: '',
+  playAllState: false,
+  togglePlayAllState: () => {
+    set(
+      produce(draft => {
+        draft.selectedItemKey = !draft.selectedItemKey
+      })
+    )
+  },
   setSelectedItemKey: (itemKey) => {
     set(
       produce(draft => {

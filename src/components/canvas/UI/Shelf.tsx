@@ -49,13 +49,11 @@ function ShelfItem(props: ShelfItemProps) {
 }
 
 export default function Shelf() {
-  //const [addSceneItem, importScene, toggleForcePlay, forcePlay] = useStore((state) => [state.addSceneItem, state.importScene, state.toggleForcePlay, state.forcePlay])
+  const togglePlayAll = useStore(state => state.togglePlayAllState)
+  const playAllState = useStore(state => state.playAllState)
+  const addSceneItem = useStore(state => state.addSceneItem)
   const [shelfY, setShelfY] = useState(0.9)
   const shelfColor = 0x999999
-  const playAllHandler = () => {
-    console.log('playall handler')
-    //toggleForcePlay()
-  }
   return (
     <group position={[0, shelfY, -0.5]}>
       <Box args={[1, 0.01, 0.1]} position={[0, 0.04, 0]}>
@@ -64,21 +62,21 @@ export default function Shelf() {
       <ShelfItem
         icon="image"
         onInteract={() => {
-          //addSceneItem('image', [0, 1, -1 - Math.random()], [0, 0, 0], './test-images/1080x720.png')
+          addSceneItem('image', 'image 1', [0, 1, -1 + Math.random()], [0, 0, 0], '404')
         }}
         x={-0.4}
       />
       <ShelfItem
         icon="video"
         onInteract={() => {
-          //addSceneItem('video', [0, 1, -1 - Math.random()], [0, 0, 0], 'https://i.imgur.com/RfqezsM.mp4')
+          addSceneItem('video', 'video 1', [0, 1, -1 + Math.random()], [0, 0, 0], '404')
         }}
         x={-0.2}
       />
       <ShelfItem
-        icon={true ? "pause" : "play"}
+        icon={playAllState ? "pause" : "play"}
         onInteract={() => {
-          playAllHandler()
+          togglePlayAll()
         }}
         x={0}
       />
