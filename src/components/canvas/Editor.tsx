@@ -8,10 +8,12 @@ import Shelf from '@/components/canvas/UI/Shelf'
 function StoreScene() {
   const items = useStore((s) => s.scene.items)
   const bg = useStore(s => s.scene.backgroundcolor)
+  const playAllState = useStore(s => s.playAllState)
   const select = useStore(s => s.setSelectedItemKey)
   const selectedKey = useStore(s => s.selectedItemKey)
   const patchItem = useStore(s => s.patchSceneItem)
   const deleteItem = useStore(s => s.removeSceneItem)
+
   const renderedItems = useMemo(() => {
     let array = []
     for (const itemKey in items) {
@@ -25,6 +27,7 @@ function StoreScene() {
             scale={scale}
             name={itemKey}
             url={url}
+            playAllState={playAllState}
             selected={selectedKey === itemKey}
             onMove={(position, rotation) => { patchItem(itemKey, { ...items[itemKey], position, rotation }) }}
             onScale={(scale) => { patchItem(itemKey, { ...items[itemKey], scale }) }}
@@ -51,7 +54,7 @@ function StoreScene() {
       }
     }
     return array
-  }, [items, selectedKey])
+  }, [items, selectedKey, playAllState])
 
   return <>
     <color attach={'background'} args={[bg]} />

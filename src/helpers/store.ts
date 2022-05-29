@@ -94,7 +94,7 @@ const useStore = create<SceneStore>(devtools((set) => ({
   togglePlayAllState: () => {
     set(
       produce(draft => {
-        draft.selectedItemKey = !draft.selectedItemKey
+        draft.playAllState = !draft.playAllState
       })
     )
   },

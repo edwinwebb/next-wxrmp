@@ -85,9 +85,10 @@ interface VideoSceneItemProps {
   onDelete: (key: string) => void
   onSelect: (key: string) => void
   onPaste: (text: string | null) => void
+  playAllState: boolean
 }
 
-export function VideoSceneItem({ position, rotation, scale, url, name, selected, onMove, onScale, onDelete, onSelect, onPaste }: VideoSceneItemProps) {
+export function VideoSceneItem({ position, rotation, scale, url, name, selected, onMove, onScale, onDelete, onSelect, onPaste, playAllState }: VideoSceneItemProps) {
   const groupRef = useRef<Group>(null!)
   const [childAspect, setChildAspect] = useState(1)
   const [isHover, setHover] = useState(false)
@@ -96,12 +97,17 @@ export function VideoSceneItem({ position, rotation, scale, url, name, selected,
   const [pastedText, paste] = usePasteFromClipboard()
   const [, copy] = useCopyToClipboard()
 
+  useEffect(() => {
+    setPlaying(playAllState)
+  }, [playAllState])
+
   return (
     <group
       ref={groupRef}
       position={position}
       rotation={rotation}
       scale={[scale, scale, scale]}
+      onClick={() => { onSelect(name) }}
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}>
       <Interactive
