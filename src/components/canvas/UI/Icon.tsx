@@ -94,6 +94,15 @@ export function Icon(props: IconProps) {
     case 'check':
       googlekey = 'done'
       break
+    case 'fork':
+      googlekey = 'fork_right'
+      break
+    case 'reset':
+      googlekey = 'restart_alt'
+      break
+    case 'film':
+      googlekey = 'theaters'
+      break
     default:
       googlekey = 'call_missed_outgoing'
   }

@@ -68,7 +68,7 @@ export default function Shelf() {
         x={-0.4}
       />
       <ShelfItem
-        icon="video"
+        icon="film"
         onInteract={() => {
           addSceneItem('video', 'video 1', [0, 1, -1 - Math.random()], [0, 0, 0], '404')
         }}
