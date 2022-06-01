@@ -8,14 +8,15 @@ import { firestore } from '@/firebase/clientApp';
 import { doc, getDoc, setDoc, addDoc, collection, Timestamp } from "@firebase/firestore";
 import { useEffect, useState } from 'react'
 import useStore, { Scene } from "@/helpers/store"
+import VREditor from '@/components/canvas/Editor'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const VREditor = dynamic(() => import('@/components/canvas/Editor'), {
-  ssr: false,
-})
+// const VREditor = dynamic(() => import('@/components/canvas/Editor'), {
+//   ssr: false,
+// })
 
 const Page = () => {
   const router = useRouter()
@@ -87,7 +88,7 @@ const Page = () => {
         </div>
       </div>
       {/* @ts-ignore */}
-      <VREditor r3f loading={isLoading} error={hasError} />
+      <VREditor r3f loading={isLoading} error={hasError} saveHandler={() => { saveScene() }} />
     </>
   )
 }

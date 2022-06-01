@@ -49,7 +49,11 @@ function ShelfItem(props: ShelfItemProps) {
   )
 }
 
-export default function Shelf() {
+interface ShelfProps {
+  saveHandler: () => void
+}
+
+export default function Shelf({ saveHandler }: ShelfProps) {
   const togglePlayAll = useStore(state => state.togglePlayAllState)
   const playAllState = useStore(state => state.playAllState)
   const addSceneItem = useStore(state => state.addSceneItem)
@@ -84,7 +88,7 @@ export default function Shelf() {
       <ShelfItem
         icon="save"
         onInteract={() => {
-          // importHandler()
+          saveHandler()
         }}
         x={0.2}
       />
