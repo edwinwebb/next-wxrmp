@@ -51,9 +51,10 @@ function ShelfItem(props: ShelfItemProps) {
 
 interface ShelfProps {
   saveHandler: () => void
+  resetHandler: () => void
 }
 
-export default function Shelf({ saveHandler }: ShelfProps) {
+export default function Shelf({ saveHandler, resetHandler }: ShelfProps) {
   const togglePlayAll = useStore(state => state.togglePlayAllState)
   const playAllState = useStore(state => state.playAllState)
   const addSceneItem = useStore(state => state.addSceneItem)
@@ -95,7 +96,7 @@ export default function Shelf({ saveHandler }: ShelfProps) {
       <ShelfItem
         icon="reset"
         onInteract={() => {
-          // exportHandler()
+          resetHandler()
         }}
         x={0.4}
       />

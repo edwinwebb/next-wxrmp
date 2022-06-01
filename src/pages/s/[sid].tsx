@@ -88,7 +88,17 @@ const Page = () => {
         </div>
       </div>
       {/* @ts-ignore */}
-      <VREditor r3f loading={isLoading} error={hasError} saveHandler={() => { saveScene() }} />
+      <VREditor r3f
+        loading={isLoading}
+        error={hasError}
+        saveHandler={() => { saveScene() }}
+        resetHandler={() => {
+          if (sid) {
+            getScene(sid.toString())
+          }
+        }
+        }
+      />
     </>
   )
 }
