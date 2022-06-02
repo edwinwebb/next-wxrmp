@@ -24,7 +24,7 @@ const ProperyRow = (props: PropertyRowProps) => {
   const { label, children, hasError, errorMessage } = props
   return (<div className="flex flex-row text-xs py-1 pr-2 md:py-2 flex-wrap">
     <div className="w-20 px-2 py-1">
-      <span>{label}</span>
+      <span className="text-md">{label}</span>
     </div>
     <div className="flex-1">
       {children}
@@ -47,13 +47,15 @@ const Page = () => {
     <>
       <div className="container mx-auto px-4">
         <div className="pt-4 md:w-1/4 md:mx-auto md:p-4">
-          <h2 className="text-xl font-bold pt-4 pb-2">Sign Up</h2>
+          <h2 className="text-xl font-bold p-2 pb-4">Sign Up</h2>
           <form onSubmit={onSubmit}>
             <ProperyRow label="E-Mail" hasError={typeof errors.email !== 'undefined'} errorMessage={errors.email?.message}>
               <input
                 {...register("email")}
+                disabled={hasSubmitted}
+                type="text"
                 className={`
-                  w-full p-0 px-1 py-1 mr-2 rounded-sm 
+                  w-full p-0 px-1 py-0 mr-2 rounded-sm 
                   text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
                   ${errors.email && 'focus:bg-red-900'}`}
               />
@@ -61,13 +63,15 @@ const Page = () => {
             <ProperyRow label="Password" hasError={typeof errors.password !== 'undefined'} errorMessage={errors.password?.message}>
               <input
                 {...register("password")}
+                disabled={hasSubmitted}
+                type='password'
                 className={`
-                  w-full p-0 px-1 py-1 mr-2 rounded-sm 
+                  w-full p-0 px-1 py-0 mr-2 rounded-sm 
                   text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
                   ${errors.password && 'focus:bg-red-900'}`}
               />
             </ProperyRow>
-            <div className="flex flex-row-reverse px-4 pt-4">
+            <div className="flex flex-row-reverse px-2 pt-4">
               <input type="submit" className="bg-pink-600 text-white rounded px-2 py-1" />
             </div>
           </form>
