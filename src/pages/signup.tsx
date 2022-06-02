@@ -74,6 +74,10 @@ const Page = () => {
             <div className="flex flex-row-reverse px-2 pt-4">
               <input type="submit" className="bg-pink-600 text-white rounded px-2 py-1" />
             </div>
+            <hr className="my-4" />
+            <div className="flex flex-row-reverse px-2 pt-4 text-center">
+              <button className="bg-pink-600 text-white rounded px-2 py-1">Signup with Google</button>
+            </div>
           </form>
         </div>
       </div>
