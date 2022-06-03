@@ -41,7 +41,13 @@ const Page = () => {
           </div>
         </div>
         <hr className='m-2 my-4' />
-
+        <h2>Coming Soon</h2>
+        <h3>GLTF</h3>
+        <p>Load in GLTF models</p>
+        <h3>Audio</h3>
+        <p></p>
+        <hr />
+        <p>TODO: Copy spline a little more. Need a good image/video demo for the hero. Expand the 4 grid to pages.</p>
       </div>
     </>
   )
