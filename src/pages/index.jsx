@@ -1,39 +1,23 @@
 import Link from 'next/link'
-import { collection, getDocs } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { firestore } from '@/firebase/clientApp';
-import { async } from '@firebase/util';
-import { useEffect, useState } from 'react';
-
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 const Page = () => {
-  const [allLinks, setAllLinks] = useState([])
-  const getAllDocs = async () => {
-    console.log('get all docs')
-    const querySnapshot = await getDocs(collection(firestore, "scenes"));
-    let links = []
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      links.push(doc.id)
-    });
-    setAllLinks(links)
-  }
-  console.log(allLinks)
-  const listItems = allLinks.map((link) =>
-    <li key={link}><Link href={"/s/" + link}>
-      <a>{link}</a>
+  const [value, loading, error] = useCollection(collection(firestore, "scenes"));
+
+  const listItems = value?.docs.map((doc) =>
+    <li key={doc.id}><Link href={"/s/" + doc.id}>
+      <a>{doc.id}</a>
     </Link></li>
   );
 
-  useEffect(() => {
-    if (allLinks.length === 0) {
-      getAllDocs()
-    }
-  }, [])
-
+  // TODO - security rule should cause an error here
   return (
     <div>
       <h2>WXRMP Index</h2>
+      <p>{error && <strong>Error: {JSON.stringify(error)}</strong>}</p>
+      <p>{loading && <span>Collection: Loading...</span>}</p>
       <ul>{listItems}</ul>
     </div>
   )
