@@ -9,6 +9,8 @@ import { doc, getDoc, setDoc, addDoc, collection, Timestamp } from "@firebase/fi
 import { useEffect, useState } from 'react'
 import useStore, { Scene } from "@/helpers/store"
 import VREditor from '@/components/canvas/Editor'
+import UserControls from '@/components/dom/Scene/User'
+import Link from 'next/link'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -22,6 +24,7 @@ const Page = () => {
   const router = useRouter()
   const [isLoading, setLoading] = useState<boolean>(true)
   const [hasError, setError] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>('an unspecified error occured')
   const scene = useStore(state => state.scene)
   const replaceScene = useStore(state => state.replaceScene)
   const { sid } = router.query
@@ -34,6 +37,7 @@ const Page = () => {
       replaceScene(data)
     } else {
       setError(true)
+      setErrorMessage('Sorry, we could\'t find that scene.')
     }
 
     setLoading(false)
@@ -49,7 +53,6 @@ const Page = () => {
   }
   const saveScene = async () => {
     if (sid) {
-      console.log(scene)
       await setDoc(doc(firestore, 'scenes', sid.toString()), {
         ...scene,
         updated: Timestamp.fromDate(new Date()),
@@ -57,6 +60,7 @@ const Page = () => {
       })
     } else {
       setError(true)
+      setErrorMessage('Sorry, we couldn\'t save that scene.')
     }
   }
 
@@ -67,13 +71,33 @@ const Page = () => {
       forkScene()
     } else {
       setError(true)
+      setErrorMessage('Sorry, the scene ID could not be found')
     }
   }, [sid])
+
+  // todo better pattern
+  if (hasError) {
+    return (<>
+      <div className='h-full w-full flex justify-center align-center'>
+        <div className="text-center">
+          <h2 className="font-bold text-2xl mt-20">Something Went Wrong</h2>
+          <p className="my-4">{errorMessage}</p>
+          <div>
+            <Link href="/"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1">Homepage</button></Link>
+            <Link href="/s/new"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1">Create New</button></Link>
+          </div>
+        </div>
+      </div>
+    </>)
+  }
 
   return (
     <>
       <div className='h-full md:flex md:flex-col md:border-r-2 
        md:border-r-blackpink-800'>
+        <div className='h-18'>
+          <UserControls />
+        </div>
         <div className='h-18'>
           <SceneControls
             saveHandler={() => { saveScene() }}
