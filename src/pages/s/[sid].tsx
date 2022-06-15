@@ -11,14 +11,7 @@ import useStore, { Scene } from "@/helpers/store"
 import VREditor from '@/components/canvas/Editor'
 import UserControls from '@/components/dom/Scene/User'
 import Link from 'next/link'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth, signInAnonymously } from 'firebase/auth';
 
-const auth = getAuth(firebaseApp);
-
-const login = () => {
-  signInAnonymously(auth);
-};
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -36,7 +29,6 @@ const Page = () => {
   const scene = useStore(state => state.scene)
   const replaceScene = useStore(state => state.replaceScene)
   const { sid } = router.query
-  const [user, userLoading, userError] = useAuthState(auth);
   const getScene = async (id: string) => {
     const docRef = doc(firestore, "scenes", id)
     const docSnap = await getDoc(docRef)
@@ -55,7 +47,7 @@ const Page = () => {
     const docRef = await addDoc(collection(firestore, "scenes"), {
       updated: Timestamp.fromDate(new Date()),
       created: Timestamp.fromDate(new Date()),
-      author_uid: user?.uid,
+      author_uid: 'temp',
       items: scene.items
     });
     router.push('/s/' + docRef.id)
@@ -64,7 +56,7 @@ const Page = () => {
     if (sid) {
       await setDoc(doc(firestore, 'scenes', sid.toString()), {
         ...scene,
-        author_uid: user?.uid,
+        author_uid: 'temp',
         updated: Timestamp.fromDate(new Date()),
         items: scene.items
       })
@@ -75,28 +67,19 @@ const Page = () => {
   }
 
   useEffect(() => {
-    login()
-  })
-
-  useEffect(() => {
     if (sid) {
-      getScene(sid.toString())
-    } else if (sid === "new") {
-      forkScene()
+      if (sid === "new") {
+        forkScene()
+      } else {
+        getScene(sid.toString())
+      }
     } else {
       setError(true)
       setErrorMessage('Sorry, the scene ID could not be found')
     }
   }, [sid])
 
-  useEffect(() => {
-    if (userError) {
-      setError(true)
-      setErrorMessage('Unable to manage user')
-    }
-  }, [userError])
 
-  console.log(user?.uid, scene.author_uid)
 
   // todo better pattern
   if (hasError) {
@@ -118,14 +101,10 @@ const Page = () => {
       <div className='h-full md:flex md:flex-col md:border-r-2 
        md:border-r-blackpink-800'>
         <div className='h-18'>
-          <UserControls userID={user?.uid} loading={userLoading} />
+          <UserControls />
         </div>
         <div className='h-18'>
-          <SceneControls
-            canSave={user?.uid === scene.author_uid}
-            saveHandler={() => { saveScene() }}
-            forkHandler={() => { forkScene() }}
-          />
+          <SceneControls />
         </div>
         <div className='h-40 md:flex-grow'>
           <SceneGraph />

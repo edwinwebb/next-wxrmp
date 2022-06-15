@@ -47,7 +47,7 @@ const ProperyRow = (props: PropertyRowProps) => {
     {hasError && <div className="w-full">{errorMessage}</div>}
   </div>)
 }
-
+// TODO : Add paste button to URL
 const ItemProperties = () => {
   const selectedKey = useStore(state => state.selectedItemKey)
   const items = useStore(state => state.scene.items)

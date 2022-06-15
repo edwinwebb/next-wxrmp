@@ -1,6 +1,18 @@
 //import { LoginIcon, LogoutIcon, UserIcon } from "@heroicons/react/solid"
 
 import { UserIcon } from "@heroicons/react/solid"
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth, signInAnonymously } from 'firebase/auth';
+import { firebaseApp } from '@/firebase/clientApp';
+import { useEffect } from "react";
+import useStore from "@/helpers/store"
+
+
+const auth = getAuth(firebaseApp);
+
+const login = () => {
+  signInAnonymously(auth);
+};
 
 // TODO - Make the proper user flow
 
@@ -50,17 +62,30 @@ import { UserIcon } from "@heroicons/react/solid"
 //   </div>)
 // }
 
-interface UserControlProps {
-  userID: string | undefined
-  loading: boolean
-}
 
-const UserControls = ({ userID, loading }: UserControlProps) => {
+const UserControls = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const updateUser = useStore(s => s.updateUserState)
+
+  useEffect(() => {
+    login()
+  })
+
+  useEffect(() => {
+    if (!loading && !error && user?.uid) {
+      updateUser(user.uid, true)
+    } else {
+      updateUser('', false)
+    }
+  }, [loading, error])
+
   return (<div className="bg-blackpink-900 text-white h-18 py-2 border-blackpink-800 border-b-2">
     <UserIcon className='h-3 w-3 inline mx-2' />
     {loading
       ? <span className="rounded h-4 w-24 bg-slate-900 inline-block"></span>
-      : <span className="inline-block text-xs">{userID}</span>
+      : error
+        ? <span className="rounded h-4 w-24 bg-red-900 inline-block" >!!! User Error !!!</span>
+        : <span className="inline-block text-xs">{user?.uid}</span>
     }
   </div >)
 }

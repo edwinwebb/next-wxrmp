@@ -6,6 +6,9 @@ import { devtools } from 'zustand/middleware'
 interface SceneStore {
   scene: Scene;
   selectedItemKey: string;
+  author_uid: String;
+  authorised: boolean;
+  updateUserState: (uid: string, authed: boolean) => void;
   router: String | null;
   playAllState: boolean;
   togglePlayAllState: () => void
@@ -30,6 +33,7 @@ export interface Scene {
   updated: string;
   created: string;
   author_uid: string;
+  scene_uid: string;
   name: string;
   description: string;
   backgroundcolor: string;
@@ -43,6 +47,7 @@ const WXRMP_LETTERS: Scene = {
   updated: '0',
   created: '0',
   author_uid: 'default',
+  scene_uid: 'default',
   items: {
     'letter-w': {
       label: 'letter Z',
@@ -87,9 +92,19 @@ const WXRMP_LETTERS: Scene = {
   }
 }
 
-// Todo split scene store and router etc
+// Todo split scene store, user and router etc
 const useStore = create<SceneStore>(devtools((set) => ({
   router: null,
+  author_uid: '',
+  authorised: false,
+  updateUserState: (uid, authed) => {
+    set(
+      produce(draft => {
+        draft.uid = uid;
+        draft.authorised = authed;
+      })
+    )
+  },
   scene: WXRMP_LETTERS,
   selectedItemKey: '',
   playAllState: false,
