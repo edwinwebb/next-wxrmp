@@ -1,5 +1,5 @@
 import useStore from '@/helpers/store'
-import { UploadIcon, DuplicateIcon, PlusSmIcon, PhotographIcon, FilmIcon } from '@heroicons/react/solid'
+import { UploadIcon, DuplicateIcon, PlusSmIcon, PhotographIcon, FilmIcon, UserIcon } from '@heroicons/react/solid'
 
 interface ControlButtonProps {
   children: React.ReactNode

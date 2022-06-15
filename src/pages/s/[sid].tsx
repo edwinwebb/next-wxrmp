@@ -4,13 +4,21 @@ import dynamic from 'next/dynamic'
 import SceneControls from '@/components/dom/Scene/Controls'
 import SceneGraph from '@/components/dom/Scene/Graph'
 import SceneProperties from '@/components/dom/Scene/Properties'
-import { firestore } from '@/firebase/clientApp';
+import { firestore, firebaseApp } from '@/firebase/clientApp';
 import { doc, getDoc, setDoc, addDoc, collection, Timestamp } from "@firebase/firestore";
 import { useEffect, useState } from 'react'
 import useStore, { Scene } from "@/helpers/store"
 import VREditor from '@/components/canvas/Editor'
 import UserControls from '@/components/dom/Scene/User'
 import Link from 'next/link'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth, signInAnonymously } from 'firebase/auth';
+
+const auth = getAuth(firebaseApp);
+
+const login = () => {
+  signInAnonymously(auth);
+};
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -28,6 +36,7 @@ const Page = () => {
   const scene = useStore(state => state.scene)
   const replaceScene = useStore(state => state.replaceScene)
   const { sid } = router.query
+  const [user, userLoading, userError] = useAuthState(auth);
   const getScene = async (id: string) => {
     const docRef = doc(firestore, "scenes", id)
     const docSnap = await getDoc(docRef)
@@ -65,15 +74,32 @@ const Page = () => {
   }
 
   useEffect(() => {
+    login()
+  })
+
+  // useEffect(() => {
+  //   if (!userError) {
+
+  //   }
+  // }, [user])
+
+  useEffect(() => {
     if (sid) {
       getScene(sid.toString())
-    } if (sid === "new") {
+    } else if (sid === "new") {
       forkScene()
     } else {
       setError(true)
       setErrorMessage('Sorry, the scene ID could not be found')
     }
   }, [sid])
+
+  useEffect(() => {
+    if (userError) {
+      setError(true)
+      setErrorMessage('Unable to create user')
+    }
+  }, [userError])
 
   // todo better pattern
   if (hasError) {
@@ -83,20 +109,20 @@ const Page = () => {
           <h2 className="font-bold text-2xl mt-20">Something Went Wrong</h2>
           <p className="my-4">{errorMessage}</p>
           <div>
-            <Link href="/"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1">Homepage</button></Link>
-            <Link href="/s/new"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1">Create New</button></Link>
+            <Link href="/"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1 text-md">Homepage</button></Link>
+            <Link href="/s/new"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1 text-md">Create New</button></Link>
           </div>
         </div>
       </div>
     </>)
   }
-
   return (
     <>
       <div className='h-full md:flex md:flex-col md:border-r-2 
        md:border-r-blackpink-800'>
         <div className='h-18'>
-          <UserControls />
+          <UserControls userID={user?.uid} loading={userLoading} />
+          {/* <button onClick={login}>Log in</button> */}
         </div>
         <div className='h-18'>
           <SceneControls
