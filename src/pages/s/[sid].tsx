@@ -52,10 +52,10 @@ const Page = () => {
     setLoading(false)
   }
   const forkScene = async () => {
-    // todo: rate limit
     const docRef = await addDoc(collection(firestore, "scenes"), {
       updated: Timestamp.fromDate(new Date()),
       created: Timestamp.fromDate(new Date()),
+      author_uid: user?.uid,
       items: scene.items
     });
     router.push('/s/' + docRef.id)
@@ -64,6 +64,7 @@ const Page = () => {
     if (sid) {
       await setDoc(doc(firestore, 'scenes', sid.toString()), {
         ...scene,
+        author_uid: user?.uid,
         updated: Timestamp.fromDate(new Date()),
         items: scene.items
       })
@@ -76,12 +77,6 @@ const Page = () => {
   useEffect(() => {
     login()
   })
-
-  // useEffect(() => {
-  //   if (!userError) {
-
-  //   }
-  // }, [user])
 
   useEffect(() => {
     if (sid) {
@@ -97,9 +92,11 @@ const Page = () => {
   useEffect(() => {
     if (userError) {
       setError(true)
-      setErrorMessage('Unable to create user')
+      setErrorMessage('Unable to manage user')
     }
   }, [userError])
+
+  console.log(user?.uid, scene.author_uid)
 
   // todo better pattern
   if (hasError) {
@@ -122,10 +119,10 @@ const Page = () => {
        md:border-r-blackpink-800'>
         <div className='h-18'>
           <UserControls userID={user?.uid} loading={userLoading} />
-          {/* <button onClick={login}>Log in</button> */}
         </div>
         <div className='h-18'>
           <SceneControls
+            canSave={user?.uid === scene.author_uid}
             saveHandler={() => { saveScene() }}
             forkHandler={() => { forkScene() }}
           />

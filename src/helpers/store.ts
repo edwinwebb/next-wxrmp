@@ -29,6 +29,7 @@ export interface SceneItem {
 export interface Scene {
   updated: string;
   created: string;
+  author_uid: string;
   name: string;
   description: string;
   backgroundcolor: string;
@@ -41,6 +42,7 @@ const WXRMP_LETTERS: Scene = {
   backgroundcolor: '#888888',
   updated: '0',
   created: '0',
+  author_uid: 'default',
   items: {
     'letter-w': {
       label: 'letter Z',

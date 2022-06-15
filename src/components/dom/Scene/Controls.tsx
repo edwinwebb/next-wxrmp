@@ -16,17 +16,17 @@ const ControlButton = (props: ControlButtonProps) => {
 interface SceneControlProps {
   saveHandler: () => void;
   forkHandler: () => void;
+  canSave: boolean;
 }
 
-const Controls = (props: SceneControlProps) => {
-  const { saveHandler, forkHandler } = props
+const Controls = ({ saveHandler, forkHandler, canSave }: SceneControlProps) => {
   const addSceneItem = useStore(state => state.addSceneItem)
   return (<div className="bg-blackpink-900 text-white h-18 py-2 flex flex-row-reverse border-blackpink-800 border-b-2">
     <div>
-      <ControlButton onClick={() => saveHandler()}>
+      {canSave && <ControlButton onClick={() => saveHandler()}>
         <UploadIcon className='h-3 w-3 inline mr-1' />
         <span className="text-xs">Save</span>
-      </ControlButton>
+      </ControlButton>}
       <ControlButton onClick={() => forkHandler()} >
         <DuplicateIcon className='h-3 w-3 inline mr-1' />
         <span className="text-xs">Fork</span>
