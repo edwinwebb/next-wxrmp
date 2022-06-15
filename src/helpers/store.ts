@@ -6,10 +6,10 @@ import { devtools } from 'zustand/middleware'
 interface SceneStore {
   scene: Scene;
   selectedItemKey: string;
-  author_uid: String;
+  user_uid: string;
   authorised: boolean;
   updateUserState: (uid: string, authed: boolean) => void;
-  router: String | null;
+  router: string | null;
   playAllState: boolean;
   togglePlayAllState: () => void
   setSelectedItemKey: (key: string) => void;
@@ -95,12 +95,12 @@ const WXRMP_LETTERS: Scene = {
 // Todo split scene store, user and router etc
 const useStore = create<SceneStore>(devtools((set) => ({
   router: null,
-  author_uid: '',
+  user_uid: '',
   authorised: false,
   updateUserState: (uid, authed) => {
     set(
       produce(draft => {
-        draft.uid = uid;
+        draft.user_uid = uid;
         draft.authorised = authed;
       })
     )

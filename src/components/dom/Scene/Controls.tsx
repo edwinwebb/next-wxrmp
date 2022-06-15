@@ -19,10 +19,15 @@ const LoadingButton = () => {
   </span>
 }
 
-const Controls = () => {
+interface SceneControlProps {
+  saveHandler: () => void;
+  forkHandler: () => void;
+}
+
+const Controls = ({ saveHandler, forkHandler }: SceneControlProps) => {
   const addSceneItem = useStore(state => state.addSceneItem)
   const scene_uid = useStore(s => s.scene.author_uid)
-  const [uid, authed] = useStore(s => [s.author_uid, s.authorised])
+  const [uid, authed] = useStore(s => [s.user_uid, s.authorised])
 
   return (<div className="bg-blackpink-900 text-white h-18 py-2 border-blackpink-800 border-b-2">
     {
@@ -35,12 +40,12 @@ const Controls = () => {
         </div>
         : <div>
           {uid === scene_uid
-            && <ControlButton onClick={() => { }}>
+            && <ControlButton onClick={() => { saveHandler() }}>
               <UploadIcon className='h-3 w-3 inline mr-1' />
               <span className="text-xs">Save</span>
             </ControlButton>
           }
-          <ControlButton onClick={() => { }} >
+          <ControlButton onClick={() => { forkHandler() }} >
             <DuplicateIcon className='h-3 w-3 inline mr-1' />
             <span className="text-xs">Fork</span>
           </ControlButton>
