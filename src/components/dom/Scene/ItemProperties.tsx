@@ -6,7 +6,6 @@ import useStore from "@/helpers/store";
 import { usePasteFromClipboard } from '@/helpers/useClipboard'
 import { ClipboardIcon } from "@heroicons/react/solid";
 
-
 const schema = yup.object({
   label: yup.string().required().max(64).min(3),
   url: yup.string(),
@@ -73,7 +72,6 @@ const ItemProperties = () => {
     }
   });
   const [pastedText, paste] = usePasteFromClipboard()
-
 
   useEffect(() => {
     setValue('label', label)
