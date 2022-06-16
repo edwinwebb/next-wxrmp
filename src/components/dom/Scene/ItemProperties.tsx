@@ -3,6 +3,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useEffect } from "react";
 import useStore from "@/helpers/store";
+import { usePasteFromClipboard } from '@/helpers/useClipboard'
+import { ClipboardIcon } from "@heroicons/react/solid";
+
 
 const schema = yup.object({
   label: yup.string().required().max(64).min(3),
@@ -37,7 +40,7 @@ interface PropertyRowProps {
 
 const ProperyRow = (props: PropertyRowProps) => {
   const { label, children, hasError, errorMessage } = props
-  return (<div className="flex flex-row text-xs py-1 pr-2 md:py-2 flex-wrap">
+  return (<div className="flex flex-row text-xs py-1 pr-2 md:py-2 flex-wrap relative">
     <div className="w-20 px-2 py-1">
       <span>{label}</span>
     </div>
@@ -47,14 +50,14 @@ const ProperyRow = (props: PropertyRowProps) => {
     {hasError && <div className="w-full">{errorMessage}</div>}
   </div>)
 }
-// TODO : Add paste button to URL
+
 const ItemProperties = () => {
   const selectedKey = useStore(state => state.selectedItemKey)
   const items = useStore(state => state.scene.items)
   const patchItem = useStore(state => state.patchSceneItem)
   const selectedItem = items[selectedKey]
   const { label, url, position, rotation, scale } = selectedItem
-  const { register, handleSubmit, formState: { isValid, isDirty, errors }, setValue } = useForm<ItemPropertiesData>({
+  const { register, handleSubmit, formState: { isValid, isDirty, errors }, setValue, trigger } = useForm<ItemPropertiesData>({
     resolver: yupResolver(schema),
     mode: "onBlur"
   });
@@ -69,6 +72,8 @@ const ItemProperties = () => {
         })
     }
   });
+  const [pastedText, paste] = usePasteFromClipboard()
+
 
   useEffect(() => {
     setValue('label', label)
@@ -103,6 +108,13 @@ const ItemProperties = () => {
             w-full p-0 px-1 py-1 mr-2 rounded-sm 
             text-xs text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
            ${errors.url && 'focus:bg-red-900'}`} />
+        <ClipboardIcon className="w-4 h-4 absolute right-3 top-2 cursor-pointer md:top-3" onClick={async () => {
+          await paste();
+          if (pastedText) {
+            setValue('url', pastedText)
+            onSubmit()
+          }
+        }} />
       </ProperyRow>
       <ProperyRow
         label="Position"

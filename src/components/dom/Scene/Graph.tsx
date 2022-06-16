@@ -55,7 +55,7 @@ const Graph = () => {
         selected={itemKey === selectedKey}
         name={label}
         deleteCallback={() => { remove(itemKey) }}
-        resetCallback={() => { patch(itemKey, { ...items[itemKey], position: [0, 0, Math.random()], rotation: [0, 0, 0], scale: 1 }) }}
+        resetCallback={() => { patch(itemKey, { ...items[itemKey], position: [0, 1, -Math.random() - .5], rotation: [0, 0, 0], scale: 1 }) }}
         selectedCallback={() => { setSelected(itemKey) }}
       />)
     }

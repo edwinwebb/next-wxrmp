@@ -58,38 +58,35 @@ const Globals = () => {
     setValue('background', background)
   }, [name, description, background])
 
-  return (<div>
-    <h3 className="text-sm px-2 font-bold pt-2">Globals</h3>
-    <div>
-      <form
-        onSubmit={onSubmit}
-        onBlur={onSubmit}>
-        <div className="text-xs py-1">
-          <label className={`${errors.background && 'bg-red-500'} inline-block w-20 text-x md:py-2 px-2`}>Background</label>
-          <input {...register("background")} defaultValue={background} type="color" className='text-xs text-white w-16 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent focus:border-gray-900 focus:bg-slate-800' />
-        </div>
-        <ProperyRow label="Name" hasError={typeof errors.name !== 'undefined'} errorMessage={errors.name?.message}>
-          <input
-            {...register("name")}
-            defaultValue={name}
-            className={`
-            w-full p-0 px-1 py-1 mr-2 rounded-sm 
-            text-xs text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
-           ${errors.name && 'focus:bg-red-900'}`} />
-        </ProperyRow>
-        <ProperyRow label="Description" hasError={typeof errors.description !== 'undefined'} errorMessage={errors.description?.message}>
-          <input
-            {...register("description")}
-            defaultValue={description}
-            className={`
-            w-full p-0 px-1 py-1 mr-2 rounded-sm 
-            text-xs text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
-           ${errors.name && 'focus:bg-red-900'}`} />
-        </ProperyRow>
+  return (<div className="pt-2">
+    <form
+      onSubmit={onSubmit}
+      onBlur={onSubmit}>
+      <div className="text-xs py-1">
+        <label className={`${errors.background && 'bg-red-500'} inline-block w-20 text-x md:py-2 px-2`}>Background</label>
+        <input {...register("background")} defaultValue={background} type="color" className='text-xs text-white w-16 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent focus:border-gray-900 focus:bg-slate-800' />
+      </div>
+      <ProperyRow label="Name" hasError={typeof errors.name !== 'undefined'} errorMessage={errors.name?.message}>
+        <input
+          {...register("name")}
+          defaultValue={name}
+          className={`
+          w-full p-0 px-1 py-1 mr-2 rounded-sm 
+          text-xs text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
+          ${errors.name && 'focus:bg-red-900'}`} />
+      </ProperyRow>
+      <ProperyRow label="Description" hasError={typeof errors.description !== 'undefined'} errorMessage={errors.description?.message}>
+        <input
+          {...register("description")}
+          defaultValue={description}
+          className={`
+          w-full p-0 px-1 py-1 mr-2 rounded-sm 
+          text-xs text-white bg-slate-700 border-transparentcfocus:border-gray-900 focus:bg-slate-800 
+          ${errors.name && 'focus:bg-red-900'}`} />
+      </ProperyRow>
 
-        <input type="submit" className="w-1 h-1" tabIndex={-1} />
-      </form>
-    </div>
+      <input type="submit" className="w-1 h-1" tabIndex={-1} />
+    </form>
   </div>)
 }
 
