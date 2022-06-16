@@ -127,7 +127,7 @@ const Page = () => {
     if (sid && sid.toString() === 'new' && authed) {
       forkScene()
     } else if (authed) {
-      setCanLoad(false)
+      setCanLoad(true)
     } else {
       console.error('Page effect error', sid, authed)
     }
