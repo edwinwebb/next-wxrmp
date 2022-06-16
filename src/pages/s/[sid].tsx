@@ -86,10 +86,10 @@ const Page = () => {
   const updateUser = useStore(s => s.updateUserState)
   const forkScene = async () => {
     const docRef = await addDoc(collection(firestore, "scenes"), {
+      ...scene,
       updated: Timestamp.fromDate(new Date()),
       created: Timestamp.fromDate(new Date()),
-      author_uid: uid,
-      items: scene.items
+      author_uid: uid
     });
     router.push('/s/' + docRef.id)
   }
@@ -146,12 +146,14 @@ const Page = () => {
   </>)
 
 }
+
 interface EditorProps {
   sid: string;
   uid: string;
   saveHandler: () => void;
   forkHandler: () => void;
 }
+
 const Editor = ({ sid, saveHandler, forkHandler, uid }: EditorProps) => {
   const [sceneData, sceneLoading, sceneError] = useDocumentData(doc(firestore, "scenes", sid))
   const replaceScene = useStore(state => state.replaceScene)
@@ -171,98 +173,9 @@ const Editor = ({ sid, saveHandler, forkHandler, uid }: EditorProps) => {
           ? <SceneControlsLoading />
           : <SceneControlsGroup saveHandler={saveHandler} forkHandler={forkHandler} />
       }
-
     </div>
-
   </>)
 }
-
-// const PageBak = () => {
-//   const router = useRouter()
-//   const [isLoading, setLoading] = useState<boolean>(true)
-//   const [hasError, setError] = useState<boolean>(false)
-//   const [errorMessage, setErrorMessage] = useState<string>('an unspecified error occured')
-//   const scene = useStore(state => state.scene)
-//   const replaceScene = useStore(state => state.replaceScene)
-//   const { sid } = router.query
-//   const getScene = async (id: string) => {
-//     const docRef = doc(firestore, "scenes", id)
-//     const docSnap = await getDoc(docRef)
-
-//     if (docSnap.exists()) {
-//       const data = { ...docSnap.data() } as Scene
-//       replaceScene(data)
-//     } else {
-//       setError(true)
-//       setErrorMessage('Sorry, we could\'t find that scene.')
-//     }
-
-//     setLoading(false)
-//   }
-//   const [ sceneData, sceneLoading, sceneError ] = useDoucment(
-//     doc(firestore, "scenes", id)
-//   )
-
-
-//   const forkScene = async () => {
-//     const docRef = await addDoc(collection(firestore, "scenes"), {
-//       updated: Timestamp.fromDate(new Date()),
-//       created: Timestamp.fromDate(new Date()),
-//       author_uid: 'temp',
-//       items: scene.items
-//     });
-//     router.push('/s/' + docRef.id)
-//   }
-//   const saveScene = async () => {
-//     if (sid) {
-//       await setDoc(doc(firestore, 'scenes', sid.toString()), {
-//         ...scene,
-//         author_uid: 'temp',
-//         updated: Timestamp.fromDate(new Date()),
-//         items: scene.items
-//       })
-//     } else {
-//       setError(true)
-//       setErrorMessage('Sorry, we couldn\'t save that scene.')
-//     }
-//   }
-
-//   // todo better pattern
-//   if (hasError) {
-//     return (<>
-//       <div className='h-full w-full flex justify-center align-center'>
-//         <div className="text-center">
-//           <h2 className="font-bold text-2xl mt-20">Something Went Wrong</h2>
-//           <p className="my-4">{errorMessage}</p>
-//           <div>
-//             <Link href="/"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1 text-md">Homepage</button></Link>
-//             <Link href="/s/new"><button className="bg-pink-600 text-white rounded px-2 py-1 mx-1 text-md">Create New</button></Link>
-//           </div>
-//         </div>
-//       </div>
-//     </>)
-//   }
-//   return (
-//     <>
-//       <div className='h-full md:flex md:flex-col md:border-r-2 
-//        md:border-r-blackpink-800'>
-//         <div className='h-18'>
-//           <UserControls />
-//         </div>
-//         { 
-//           sceneLoading 
-//             ? <SceneControlsLoading />
-//             : <SceneControlsGroup saveHandler={ saveScene } forkHandler={ forkScene } /> 
-//         }
-
-//       </div>
-//       {/* @ts-ignore */}
-//       <VREditor r3f
-//         saveHandler={() => { saveScene() }}
-//       />
-//     </>
-//   )
-// }
 
 export default Page
 
