@@ -19,9 +19,9 @@ const Balance = ({ child }) => {
 
   return (
     <>
-      <div className={`${hasCanvas ? 'flex flex-col flex-wrap h-screen' : 'overflow-scroll'} md:flex-row  bg-blackpink-900`}>
+      <div className='flex flex-col flex-wrap h-screen md:flex-row  bg-blackpink-900'>
         <div className='h-11 w-screen'><Menu /></div>
-        <div className={`${hasCanvas ? 'h-96' : 'overflow-scroll'} md:h-full ${hasCanvas ? 'md:w-80' : 'md:w-full'} bg-blackpink-900 text-white`}>
+        <div className={`${hasCanvas ? 'h-96' : 'overflow-scroll'} bg-blackpink-900 text-white md:h-full ${hasCanvas ? 'md:w-80' : 'md:w-full'}`}>
           <Dom>{dom}</Dom>
         </div>
         {hasCanvas && <div className='flex-1 w-full'><LCanvas>{r3f}</LCanvas></div>}

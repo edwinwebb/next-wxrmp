@@ -79,7 +79,7 @@ const Page = () => {
             />
           </svg>
         </FeatureBlock>
-        <FeatureBlock header="TikTok" sub="Play multiple videos in VR">
+        <FeatureBlock header="TikTok" sub="@wxrmp">
           <svg
             class="w-6 h-6 text-cyan-400 fill-current"
             xmlns="http://www.w3.org/2000/svg"
