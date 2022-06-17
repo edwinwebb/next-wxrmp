@@ -1,15 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import LOGO from '../../public/img/wxrmp-logo.png'
 import { BriefcaseIcon, MailIcon, PhotographIcon, SearchIcon } from '@heroicons/react/solid'
 
-// interface FeatureBlockProps {
-//   children: ReactElement[];
-//   header: string;
-//   sub: string;
-// }
+interface FeatureBlockProps {
+  children: JSX.Element;
+  header: string;
+  sub: string;
+}
 
-const FeatureBlock = ({ children, header, sub }) => {
+const FeatureBlock = ({ children, header, sub }: FeatureBlockProps) => {
   return (<div className='rounded-lg bg-stone-900 m-4 p-6 py-8 text-center'>
     <div className='rounded-lg p-4 mb-8 text-center bg-stone-800 inline-block'>
       {children}
@@ -23,7 +22,7 @@ const Page = () => {
   return (<>
     <div className='container mx-auto md:w-[1024px]'>
       <div className='w-60 md:w-80 h-60 md:h-80 my-4 md:my-8 mx-auto block'>
-        <Image src={LOGO} alt="WXRMP" />
+        <Image src={'img/wxrmp-logo.png'} alt="WXRMP" />
       </div>
       <h2 className='text-center text-4xl w-96 mx-auto mb-8 font-bold'>Your media in VR</h2>
       <div className="text-center">
@@ -57,7 +56,7 @@ const Page = () => {
           <PhotographIcon className='w-8 h-8 text-stone-400' />
         </FeatureBlock>
       </div>
-      <h2 className='text-center text-xl text-stone-100 mt-12 font-bold'>We're just getting started</h2>
+      <h2 className='text-center text-xl text-stone-100 mt-12 font-bold'>We&apos;re just getting started</h2>
       <p className='text-center py-2 text-stone-300'>Please reach out to get help or just to connect. Maybe you found a bug or have an idea. If you think you can contribute then please get in touch! </p>
       <div className='grid grid-cols-1 md:grid-cols-3'>
         <FeatureBlock header="Email Us" sub="hello@wxrmp.com">
@@ -71,7 +70,7 @@ const Page = () => {
         </FeatureBlock>
         <FeatureBlock header="Twitter" sub="@wxrmp">
           <svg
-            class="w-6 h-6 text-blue-400 fill-current"
+            className="w-6 h-6 text-blue-400 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24">
             <path
@@ -81,7 +80,7 @@ const Page = () => {
         </FeatureBlock>
         <FeatureBlock header="TikTok" sub="@wxrmp">
           <svg
-            class="w-6 h-6 text-cyan-400 fill-current"
+            className="w-6 h-6 text-cyan-400 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24">
             <path
@@ -90,7 +89,7 @@ const Page = () => {
         </FeatureBlock>
         <FeatureBlock header="Reddit" sub="/r/wxrmp">
           <svg
-            class="w-6 h-6 text-orange-400 fill-current"
+            className="w-6 h-6 text-orange-400 fill-current"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
             <path
