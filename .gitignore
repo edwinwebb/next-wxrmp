@@ -46,3 +46,6 @@ report.*.json
 
 # firebase
 firebase-debug.log
+.firebase
+fire*.log
+ui-debug.log
