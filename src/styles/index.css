@@ -20,6 +20,11 @@
   ;
 }
 
+#mainLayout.nocanvas {
+  display: block;
+  height: auto;
+}
+
 #menu {
   grid-area: menu;
 }

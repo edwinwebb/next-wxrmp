@@ -19,7 +19,7 @@ const Balance = ({ child }) => {
 
   return (
     <>
-      <div className=' bg-blackpink-900 text-white"' id="mainLayout">
+      <div className={`bg-blackpink-900 text-white ${hasCanvas ? 'canvas' : 'nocanvas'}`} id="mainLayout">
         <div id="menu"><Menu /></div>
         <div id="dom">
           <Dom>{dom}</Dom>
