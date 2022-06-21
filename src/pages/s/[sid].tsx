@@ -36,13 +36,13 @@ interface SceneControlGroupProps {
 
 const SceneControlsGroup = ({ saveHandler, forkHandler }: SceneControlGroupProps) => {
   return (<>
-    <div className='h-18'>
+    <div>
       <SceneControls saveHandler={saveHandler} forkHandler={forkHandler} />
     </div>
-    <div className='h-40 md:flex-grow'>
+    <div>
       <SceneGraph />
     </div>
-    <div className="h-64">
+    <div>
       <SceneProperties />
     </div>
   </>)
@@ -50,13 +50,13 @@ const SceneControlsGroup = ({ saveHandler, forkHandler }: SceneControlGroupProps
 
 const SceneControlsLoading = () => (
   <>
-    <div className='h-18'>
-      <div className='rounded w-full h-14 bg-blackpink-800' />
+    <div>
+      <div className='rounded w-full  bg-blackpink-800' />
     </div>
-    <div className='h-40 md:flex-grow'>
+    <div>
       <div className='rounded w-full h-32 bg-blackpink-800' />
     </div>
-    <div className="h-64">
+    <div>
       <div className='rounded w-full h-32 bg-blackpink-800' />
     </div>
   </>)
@@ -168,9 +168,12 @@ const Editor = ({ sid, saveHandler, forkHandler, uid }: EditorProps) => {
   }, [sceneLoading, sceneError, sceneData])
 
   return (<>
-    <div className='h-full md:flex md:flex-col md:border-r-2 
+    <div className='h-full md:border-r-2 
+      grid 
+      grid-rows-[42px_42px_auto_165px]
+      md:grid-rows-[42px_42px_auto_225px]
        md:border-r-blackpink-800'>
-      <div className='h-18'>
+      <div>
         <UserControls uid={uid} loading={sceneLoading} />
       </div>
       {

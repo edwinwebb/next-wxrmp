@@ -22,7 +22,6 @@ const Page = () => {
   return (<>
     <div className='container mx-auto md:w-[1024px]'>
       <div className='w-60 md:w-80 h-60 md:h-80 my-4 md:my-8 mx-auto block'>
-        <Image src={'img/wxrmp-logo.png'} alt="WXRMP" />
       </div>
       <h2 className='text-center text-4xl w-96 mx-auto mb-8 font-bold'>Your media in VR</h2>
       <div className="text-center">

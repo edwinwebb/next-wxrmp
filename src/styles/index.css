@@ -7,3 +7,37 @@
     box-sizing: border-box;
   }
 }
+
+#mainLayout {
+  display: grid;
+  height: 100vh;
+  gap: 0px;
+  grid-template-rows: 44px 425px auto;
+  grid-template-areas:
+    "menu"
+    "dom"
+    "r3f"
+  ;
+}
+
+#menu {
+  grid-area: menu;
+}
+
+#dom {
+  grid-area: dom;
+}
+
+#r3f {
+  grid-area: r3f;
+}
+
+@media (min-width: 1024px) {
+  #mainLayout {
+    grid-template-columns: 300px auto;
+    grid-template-rows: 44px auto;
+    grid-template-areas:
+      "menu menu"
+      "dom r3f";
+  }
+}

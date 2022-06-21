@@ -26,7 +26,7 @@ interface PropertyRowProps {
 const ProperyRow = (props: PropertyRowProps) => {
   const { label, children, hasError, errorMessage } = props
   return (<div className="flex flex-row text-xs py-1 pr-2 md:py-2 flex-wrap">
-    <div className="w-20 px-2 py-1">
+    <div className="w-20 px-2 py-1 text-white">
       <span>{label}</span>
     </div>
     <div className="flex-1">
@@ -63,7 +63,7 @@ const Globals = () => {
       onSubmit={onSubmit}
       onBlur={onSubmit}>
       <div className="text-xs py-1">
-        <label className={`${errors.background && 'bg-red-500'} inline-block w-20 text-x md:py-2 px-2`}>Background</label>
+        <label className={`${errors.background && 'bg-red-500'} inline-block w-20 text-x md:py-2 px-2 text-white`}>Background</label>
         <input {...register("background")} defaultValue={background} type="color" className='text-xs text-white w-16 p-0 px-1 py-1 mr-2 rounded-sm bg-slate-700 border-transparent focus:border-gray-900 focus:bg-slate-800' />
       </div>
       <ProperyRow label="Name" hasError={typeof errors.name !== 'undefined'} errorMessage={errors.name?.message}>
