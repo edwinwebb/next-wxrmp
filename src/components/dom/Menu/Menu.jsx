@@ -1,6 +1,4 @@
 import Link from "next/link"
-import LogoImg from '../../../../public/img/wxrmp-logo.png'
-import Image from 'next/image'
 
 export default function Menu() {
   return (
@@ -8,7 +6,7 @@ export default function Menu() {
       <div>
         <Link href="/">
           <a className="flex flex-row justify-center items-center h-11 pl-2">
-            <Image src={LogoImg} alt="WXRMP" height={36} width={36} />
+            <svg id="WXRMP" className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.33 425.5"><polygon points="0 283.22 245.66 425.05 245.66 141.38 0 283.22" fill="#ff7096" opacity=".86" /><polygon points="245.66 141.38 245.66 425.05 491.33 283.22 245.66 141.38" fill="#ff5c8a" opacity=".87" /><polygon points="245.66 0 245.66 425.5 491.33 283.67 245.66 0" fill="#ff0a54" opacity=".92" /><polygon points="245.66 0 245.66 425.5 0 283.67 245.66 0" fill="#ff477e" opacity=".88" /></svg>
             <h1 className="pl-2 inline align-text-top text-xl font-bold uppercase tracking-wide text-white">WXRMP</h1>
           </a>
         </Link>

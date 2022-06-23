@@ -17,6 +17,10 @@ MVP$
 /view/[sid] : view a scene without being able to edit it
 /buy/[sid] : get access to a scene
 
+## Color notes
+https://coolors.co/palette/ff0a54-ff477e-ff5c8a-ff7096-ff85a1-ff99ac-fbb1bd-f9bec7-f7cad0-fae0e4
+https://coolors.co/palette/ffe0e9-ffc2d4-ff9ebb-ff7aa2-e05780-b9375e-8a2846-602437-522e38
+
 ## TODO
 App
 - Store

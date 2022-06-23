@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { BriefcaseIcon, MailIcon, PhotographIcon, SearchIcon } from '@heroicons/react/solid'
 
 interface FeatureBlockProps {
@@ -21,7 +20,8 @@ const FeatureBlock = ({ children, header, sub }: FeatureBlockProps) => {
 const Page = () => {
   return (<>
     <div className='container mx-auto md:w-[1024px]'>
-      <div className='w-60 md:w-80 h-60 md:h-80 my-4 md:my-8 mx-auto block'>
+      <div className='w-60 md:w-80 h-60 md:h-80 my-4 md:my-8 mx-auto block'>=======
+        <svg id="WXRMP" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.33 425.5"><polygon points="0 283.22 245.66 425.05 245.66 141.38 0 283.22" fill="#ff7096" opacity=".86" /><polygon points="245.66 141.38 245.66 425.05 491.33 283.22 245.66 141.38" fill="#ff5c8a" opacity=".87" /><polygon points="245.66 0 245.66 425.5 491.33 283.67 245.66 0" fill="#ff0a54" opacity=".92" /><polygon points="245.66 0 245.66 425.5 0 283.67 245.66 0" fill="#ff477e" opacity=".88" /></svg>
       </div>
       <h2 className='text-center text-4xl w-96 mx-auto mb-8 font-bold'>Your media in VR</h2>
       <div className="text-center">
